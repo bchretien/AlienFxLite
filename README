@@ -1,0 +1,55 @@
+This is the original text extracted from:
+
+http://forum.notebookreview.com/alienware/458528-alienfx-lite-linux-windows-alienfx-tool.html
+
+"
+
+Hi,
+
+Since I received my Allpowerfull M15x laptop, I always wanted to use the alienFX lights as an indicator of whether I am currently busy or available to talk to/etc... The solution provided by alienware would be to load up the alienFX software (takes a relative long time), load up a previously created profile, hit the apply button and exit the application. Suffice to say that this is really impractical to be of any use. The other major problem was that I use mainly Linux as my working environment and alienfx is not available for linux and the alienware software seems not to work on Windows over a virtual machine installed(tried both Vmware and VMBox).
+
+Thus I decided to write my own alienFX program which would work under Windows and Linux. Here is the Result
+
+I would be grateful for any comments and opinions on how to make the application better. Also, please let me know if you think the application is useless, so that I know if there is any point in further developing this application.
+
+****DISCLAIMER****
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+USE THIS SOFTWARE ON YOUR OWN RISK!
+
+
+AlienFX Lite
+
+
+Revision History:
+Code:
+
+Date       | Description            | version  | url
+15/03/2010 | Forth  Verison         | 0.4b     | http://progger.co.uk/alienfx/AlienFXLite-0.4b.jar
+12/02/2010 | Third  Verison         | 0.3      | http://progger.co.uk/alienfx/AlienFXLite-0.3.jar
+12/02/2010 | Second Verison         | 0.2      | http://progger.co.uk/alienfx/AlienFXLite-0.2.jar
+10/02/2010 | First version released | 0.1      |  http://progger.co.uk/alienfx/AlienFXLite-0.1.jar
+
+
+Description:
+AlienFX Lite is a simple cross-platform program to create profiles and set the AlienFX lightning to the set colors. This application was done for the Allpowerfull M15x and only tested on this machine. It should also work on the M17x. The application will most likely accept the Area 51 m15x but it was untested. The current supported platforms are:
+Linux (32 bit), Linux(64 bit), Mac OS X(UNTESTED), Windows 7(64 bit), Windows 7 (32 bit), Windows Vista (32bit), Windows Vista 64bit, Windows XP
+
+Special Thanks:
+Thanks go to Ingrater (http://3d.benjamin-thaut.de/) for providing me with the protocol for the alienFX device and some windows native code.
+
+
+"
+End of Qouted Text.
+
+Now, I'm decided to start sharing this Great tool, why? becasuse I recently bought an almighty powerful alienware MX15 ;D  and because this is my personal ( projects,entertainment, work ) lappie, and I love linux, first things I investigated was if there were linux support for all the hardware, including the amazing backlit keyboard. That's how I found AlienFxLite.  Now, after thinking so much about how great this thing is, I decided to share to others, so we can improve the tool.
+
+
+Enjoy.
+
+
+@m3rol
+
+
+
+
