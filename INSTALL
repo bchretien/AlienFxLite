@@ -1,0 +1,7 @@
+In order to compile the Linux library (libAlienXX.so):
+
+> mkdir build && cd build
+> cmake ..
+> make && make install
+
+libAlienXX.so will be installed in "lib".
