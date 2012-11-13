@@ -1,7 +1,7 @@
-In order to compile the Linux library (libAlienXX.so):
+In order to compile the Linux library (libAlienXX.so) and the Java GUI (AlienFX.jar):
 
 > mkdir build && cd build
 > cmake ..
 > make && make install
 
-libAlienXX.so will be installed in "lib".
+libAlienXX.so will be installed in "lib" and AlienFX.jar in the root folder.

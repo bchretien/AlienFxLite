@@ -58,4 +58,18 @@ INSTALL(
 # SECOND PART: GENERATE JAVA GUI
 ########################################################################
 
-# TO BE DONE
+# Java required
+FIND_PACKAGE(Java REQUIRED COMPONENTS Development)
+
+# Basic macros for the generation of jar files
+INCLUDE(UseJava)
+
+# Include variable JAVA_ALIENFX_SRC
+INCLUDE(src/uk/co/progger/alienFXLite/SourcesLib.cmake)
+
+# GUI jar
+SET(CMAKE_JAVA_TARGET_OUTPUT_NAME AlienFX)
+ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
+
+# Install in the root folder
+INSTALL_JAR(AlienFX ${CMAKE_CURRENT_SOURCE_DIR})
