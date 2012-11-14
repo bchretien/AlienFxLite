@@ -62,13 +62,14 @@ INSTALL(
 FIND_PACKAGE(Java REQUIRED COMPONENTS Development)
 
 # Basic macros for the generation of jar files
-INCLUDE(UseJava)
+INCLUDE(${CMAKE_SOURCE_DIR}/CMakeModules/UseJava.cmake)
 
 # Include variable JAVA_ALIENFX_SRC
 INCLUDE(src/uk/co/progger/alienFXLite/SourcesLib.cmake)
 
 # GUI jar
 SET(CMAKE_JAVA_TARGET_OUTPUT_NAME AlienFX)
+SET(CMAKE_JAVA_JAR_ENTRY_POINT uk/co/progger/alienFXLite/Launcher)
 ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
 
 # Install in the root folder

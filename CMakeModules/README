@@ -1,0 +1,4 @@
+This is an updated version of UseJava.cmake and associated CMake modules. Support for executable jar files has been added recently.
+
+CMake git repository information: http://www.cmake.org/Wiki/CMake/Git
+Thread on the subject: http://thread.gmane.org/gmane.comp.programming.tools.cmake.user/39023/focus=39959
