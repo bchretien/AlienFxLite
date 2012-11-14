@@ -1,5 +1,5 @@
 #include <libusb/libusb.h>
-#include "uk_co_progger_alienFXLite_led_LEDController.h"
+#include "LEDController.h"
 
 //some defines
 #define SEND_REQUEST_TYPE 0x21

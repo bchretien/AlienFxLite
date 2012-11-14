@@ -23,7 +23,7 @@ ENDIF(LIBUSB-1.0_FOUND)
 FIND_PACKAGE(JNI REQUIRED)
 
 # Useful variable
-SET(ALIENLIB_SRC_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/linuxLibSrc")
+SET(ALIENLIB_SRC_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/src/cpp")
 
 # Include paths
 INCLUDE_DIRECTORIES("${ALIENLIB_SRC_PATH}")
@@ -31,7 +31,7 @@ INCLUDE_DIRECTORIES("${JAVA_INCLUDE_PATH};${JAVA_INCLUDE_PATH2}")
 
 # Source and headers of the project
 SET(ALIEN_SRC "${ALIENLIB_SRC_PATH}/main.cpp")
-SET(ALIEN_HEADERS "${ALIENLIB_SRC_PATH}/uk_co_progger_alienFXLite_led_LEDController.h")
+SET(ALIEN_HEADERS "${ALIENLIB_SRC_PATH}/LEDController.h")
 
 # 32 or 64bits?
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -65,7 +65,7 @@ FIND_PACKAGE(Java REQUIRED COMPONENTS Development)
 INCLUDE(${CMAKE_SOURCE_DIR}/CMakeModules/UseJava.cmake)
 
 # Include variable JAVA_ALIENFX_SRC
-INCLUDE(src/uk/co/progger/alienFXLite/SourcesLib.cmake)
+INCLUDE(src/java/uk/co/progger/alienFXLite/SourcesLib.cmake)
 
 # GUI jar
 SET(CMAKE_JAVA_TARGET_OUTPUT_NAME AlienFX)

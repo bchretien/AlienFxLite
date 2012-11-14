@@ -1,4 +1,4 @@
-SET(currentFolder "src/uk/co/progger/alienFXLite")
+SET(currentFolder "src/java/uk/co/progger/alienFXLite")
 
 SET(JAVA_ALIENFX_SRC
   ${currentFolder}/AlienFXProperties.java
