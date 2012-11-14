@@ -76,3 +76,12 @@ ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
 
 # Install in the root folder
 INSTALL_JAR(AlienFX ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Add the images to the executable jar
+ADD_CUSTOM_TARGET(Final_jar ALL)
+ADD_CUSTOM_COMMAND(
+   COMMAND ${Java_JAR_EXECUTABLE}
+   ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_SOURCE_DIR}/src/java uk/co/progger/alienFXLite/gui/images/
+   DEPENDS ${CMAKE_BINARY_DIR}/AlienFX.jar
+   TARGET  Final_jar
+)

@@ -4,21 +4,22 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class AlienFXResources {
-	public static final String ALIENFX_ICON_NAME = "alienFX.png";
-	public static final String APPLY_PROFILE_ICON_NAME = "apply.png";
-	public static final String ERASE_PROFILE_ICON_NAME = "erase.png";
-	public static final String SAVE_PROFILE_ICON_NAME = "save.png";
-	public static final String NEW_PROFILE_ICON_NAME = "new.png";
+	public static final String ICON_FOLDER = "images";
+	public static final String ALIENFX_ICON_NAME = ICON_FOLDER + "/alienFX.png";
+	public static final String APPLY_PROFILE_ICON_NAME = ICON_FOLDER + "/apply.png";
+	public static final String ERASE_PROFILE_ICON_NAME = ICON_FOLDER + "/erase.png";
+	public static final String SAVE_PROFILE_ICON_NAME = ICON_FOLDER + "/save.png";
+	public static final String NEW_PROFILE_ICON_NAME = ICON_FOLDER + "/new.png";
 	
-	public static final String COPY_ICON_NAME = "copy.png";
-	public static final String PASTE_ICON_NAME = "paste.png";
-	public static final String CREATE_COLOR_ICON_NAME = "createColor.png";
-	public static final String CREATE_MORPH_ICON_NAME = "createMorph.png";
-	public static final String CREATE_BLINK_ICON_NAME = "createBlink.png";
-	public static final String ERASE_ACTION_ICON_NAME = "eraseAction.png";
+	public static final String COPY_ICON_NAME = ICON_FOLDER + "/copy.png";
+	public static final String PASTE_ICON_NAME = ICON_FOLDER + "/paste.png";
+	public static final String CREATE_COLOR_ICON_NAME = ICON_FOLDER + "/createColor.png";
+	public static final String CREATE_MORPH_ICON_NAME = ICON_FOLDER + "/createMorph.png";
+	public static final String CREATE_BLINK_ICON_NAME = ICON_FOLDER + "/createBlink.png";
+	public static final String ERASE_ACTION_ICON_NAME = ICON_FOLDER + "/eraseAction.png";
 	
-	public static final String INFO_ACTION_ICON_NAME = "info.png";
-	public static final String ARROW_ICON_NAME = "arrow.png";
+	public static final String INFO_ACTION_ICON_NAME = ICON_FOLDER + "/info.png";
+	public static final String ARROW_ICON_NAME = ICON_FOLDER + "/arrow.png";
 	
 	public static final Image ALIEN_FX_LITE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(ALIENFX_ICON_NAME));
 	public static final Image NEW_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(NEW_PROFILE_ICON_NAME));
