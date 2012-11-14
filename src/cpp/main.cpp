@@ -1,4 +1,4 @@
-#include <libusb/libusb.h>
+#include <libusb.h>
 #include "LEDController.h"
 
 //some defines
