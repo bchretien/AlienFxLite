@@ -42,7 +42,7 @@ else(CMAKE_SIZEOF_VOID_P EQUAL 8)
   SET(ARCH "32")
 endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
-# Alien library
+# Native library
 ADD_LIBRARY(Alien${ARCH} SHARED ${ALIEN_SRC} ${ALIEN_HEADERS})
 # Link with libusb
 TARGET_LINK_LIBRARIES(Alien${ARCH} ${LIBUSB_LIB})
@@ -82,6 +82,14 @@ ADD_CUSTOM_TARGET(Final_jar ALL)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
    ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_SOURCE_DIR}/src/java uk/co/progger/alienFXLite/gui/images/
+   DEPENDS ${CMAKE_BINARY_DIR}/AlienFX.jar
+   TARGET  Final_jar
+)
+
+# Add the native library to the executable jar
+ADD_CUSTOM_COMMAND(
+   COMMAND ${Java_JAR_EXECUTABLE}
+   ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_SOURCE_DIR} lib/
    DEPENDS ${CMAKE_BINARY_DIR}/AlienFX.jar
    TARGET  Final_jar
 )

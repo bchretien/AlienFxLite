@@ -43,7 +43,8 @@ public class AlienFXProperties {
 	
 	//native libraries
 	public static final String ALIENFX_NATIVE_LIBRARY_NAME = "Alien";
-	public static final String ALIENFX_NATIVE_LIBRARY = ALIENFX_NATIVE_LIBRARY_NAME+AlienFXProperties.arch;
+	public static final String ALIENFX_NATIVE_LIBRARY_FOLDER = "lib";
+	public static final String ALIENFX_NATIVE_LIBRARY = ALIENFX_NATIVE_LIBRARY_NAME + AlienFXProperties.arch;
 	
 	//powermodes and region ids
 	public static final String ALIEN_FX_DEFAULT_POWER_MODE = "";

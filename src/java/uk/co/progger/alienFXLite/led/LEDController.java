@@ -5,6 +5,7 @@ import uk.co.progger.alienFXLite.AlienFXProperties;
 class LEDController {
 	
 	static {
+		System.setProperty("java.library.path", AlienFXProperties.ALIENFX_NATIVE_LIBRARY_FOLDER);
         System.loadLibrary(AlienFXProperties.ALIENFX_NATIVE_LIBRARY);
     }	
 	
