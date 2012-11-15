@@ -120,7 +120,13 @@ JAVA_APPEND_LIBRARY_DIRECTORIES(JAVA_AWT_LIBRARY_DIRECTORIES
   /usr/lib/jvm/default-java/jre/lib/{libarch}
   /usr/lib/jvm/default-java/jre/lib
   /usr/lib/jvm/default-java/lib
-  )
+  # Ubuntu
+  /usr/lib/jvm/java-7-openjdk-{libarch}/jre/lib/{libarch}
+  /usr/lib/jvm/java-6-openjdk-{libarch}/jre/lib/{libarch}
+  /usr/lib/jvm/java-1.5.0-gcj-4.6/lib                      # tsk, packagers should have used {libarch}
+  /usr/lib/jvm/java-1.5.0-gcj-4.5/lib
+  /usr/lib/jvm/java-1.5.0-gcj-4.4/lib
+)
 
 set(JAVA_JVM_LIBRARY_DIRECTORIES)
 foreach(dir ${JAVA_AWT_LIBRARY_DIRECTORIES})
@@ -137,6 +143,9 @@ set(JAVA_AWT_INCLUDE_DIRECTORIES
   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\JavaSoft\\Java Development Kit\\1.4;JavaHome]/include"
   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\JavaSoft\\Java Development Kit\\1.3;JavaHome]/include"
   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\JavaSoft\\Java Development Kit\\${java_install_version};JavaHome]/include"
+)
+
+JAVA_APPEND_LIBRARY_DIRECTORIES(JAVA_AWT_INCLUDE_DIRECTORIES
   ${_JAVA_HOME}/include
   /usr/include
   /usr/local/include
@@ -153,7 +162,13 @@ set(JAVA_AWT_INCLUDE_DIRECTORIES
   /opt/sun-jdk-1.5.0.04/include
   # Debian specific path for default JVM
   /usr/lib/jvm/default-java/include
-  )
+  # Ubuntu
+  /usr/lib/jvm/java-7-openjdk-{libarch}/include
+  /usr/lib/jvm/java-6-openjdk-{libarch}/include
+  /usr/lib/jvm/java-1.5.0-gcj-4.6/include
+  /usr/lib/jvm/java-1.5.0-gcj-4.5/include
+  /usr/lib/jvm/java-1.5.0-gcj-4.4/include
+)
 
 foreach(JAVA_PROG "${JAVA_RUNTIME}" "${JAVA_COMPILE}" "${JAVA_ARCHIVE}")
   get_filename_component(jpath "${JAVA_PROG}" PATH)
@@ -236,7 +251,7 @@ find_path(JAVA_AWT_INCLUDE_PATH jawt.h
   ${JAVA_INCLUDE_PATH}
 )
 
-include(${CMAKE_CURRENT_LIST_DIR}/FindPackageHandleStandardArgs.cmake)
+include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(JNI  DEFAULT_MSG  JAVA_AWT_LIBRARY JAVA_JVM_LIBRARY
                                                     JAVA_INCLUDE_PATH  JAVA_INCLUDE_PATH2 JAVA_AWT_INCLUDE_PATH)
 

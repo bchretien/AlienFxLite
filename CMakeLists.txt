@@ -4,6 +4,8 @@ SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
 PROJECT(AlienFxLite)
 
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
+
 ########################################################################
 # FIRST PART: GENERATE LED CONTROLLER LIB (C++)
 ########################################################################
@@ -21,7 +23,7 @@ ELSE(LIBUSB-1.0_FOUND)
 ENDIF(LIBUSB-1.0_FOUND)
 
 # Java JNI headers required
-FIND_PACKAGE(JNI REQUIRED)
+FIND_PACKAGE(JNI2 REQUIRED)
 
 # Useful variable
 SET(ALIENLIB_SRC_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/src/cpp")
