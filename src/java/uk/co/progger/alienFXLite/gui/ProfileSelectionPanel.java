@@ -144,7 +144,11 @@ public class ProfileSelectionPanel extends JPanel {
 	
 	private class DeleteListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			profiles.removeProfile(model.getProfile());
+			int choice = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to delete this profile?", "Input",
+					JOptionPane.YES_NO_OPTION);
+			if (choice == JOptionPane.YES_OPTION)
+				profiles.removeProfile(model.getProfile());
 		}
 	}
 	
