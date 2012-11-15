@@ -1,6 +1,9 @@
 #include <libusb.h>
 #include "LEDController.h"
 
+#include <iostream>
+#include <stdlib.h> // strtol
+
 //some defines
 #define SEND_REQUEST_TYPE 0x21
 #define SEND_REQUEST 0x09
@@ -13,17 +16,11 @@
 #define READ_INDEX 0x0
 
 #define ALLPOWERFULL_ALIENFX_PID 0x512
-#define ALLPOWERFULL_ALIENFX_VID 0x187c
 
-#define AREA51_ALIENFX_PID 0x511
-#define AREA51_ALIENFX_VID 0x187c
-
-#define ALLPOWERFULL_ALIENFX 1
-#define AREA51_ALIENFX 2
-#define NOT_FOUND 0
+#define NOT_FOUND -1
 
 #define SEND_DATA_SIZE 9
-#define READ_DATA_SIZE (alienFXid == ALLPOWERFULL_ALIENFX ? 8 : 9)
+#define READ_DATA_SIZE (alienFXid == (int)ALLPOWERFULL_ALIENFX_PID ? 8 : 9)
 
 //the apps global variables
 libusb_context* context;
@@ -51,27 +48,51 @@ int ReadDevice(unsigned char* pData, int pDataLength){
   return libusb_control_transfer(alienFx, READ_REQUEST_TYPE, READ_REQUEST, READ_VALUE, READ_INDEX, pData,pDataLength,0);
 }
 
+std::string exec(const char* cmd) {
+    FILE* pipe = popen(cmd, "r");
+    if (!pipe) return "ERROR";
+    char buffer[128];
+    std::string result = "";
+    while(!feof(pipe)) {
+    	if(fgets(buffer, 128, pipe) != NULL)
+    		result += buffer;
+    }
+    pclose(pipe);
+    return result;
+}
+
 int AlienfxInit(){
   libusb_init(&context);
   libusb_set_debug (context, 3);
-  alienFx = libusb_open_device_with_vid_pid(context, ALLPOWERFULL_ALIENFX_VID, ALLPOWERFULL_ALIENFX_PID);
-  
-  //check if we found the device
-  alienFXid = ALLPOWERFULL_ALIENFX;  
-  if(alienFx == NULL){
-    alienFx = libusb_open_device_with_vid_pid(context, AREA51_ALIENFX_VID, AREA51_ALIENFX_PID);
-    alienFXid = AREA51_ALIENFX;
 
-    if(alienFx == NULL)
-      return NOT_FOUND;
-  }
+  // TODO: find a cleaner and more portable solution to get the PID
+  // try to find the vid/pid of the alienware hardware
+  const char* usb_cmd = "lsusb | grep \"Alienware Corporation\" | cut -d' ' -f 6";
+  std::string output = exec(usb_cmd);
+
+  // no AlienFX device detected
+  if(output.length() == 0) return NOT_FOUND;
   
+  std::string prefix = "0x";
+  std::string strVID = prefix + output.substr(0,4);
+  std::string strPID = prefix + output.substr(6);
+
+  // convert vid/pid to uint16 for libusb
+  uint16_t vid = strtol(strVID.c_str(), NULL, 16);
+  uint16_t pid = strtol(strPID.c_str(), NULL, 16);
+
+  alienFx = libusb_open_device_with_vid_pid(context, vid, pid);
+
+  // device not found, return NOT_FOUND
+  if(alienFx == NULL) return NOT_FOUND;
+
   detach(alienFx);
-  int res = libusb_claim_interface(alienFx,0);
-  if(res < 0)
-    return NOT_FOUND;
 
-  return alienFXid;
+  int res = libusb_claim_interface(alienFx, 0);
+
+  if(res < 0) return NOT_FOUND;
+
+  return pid;
 }
 
 void AlienfxDeinit(){

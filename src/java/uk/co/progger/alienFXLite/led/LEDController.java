@@ -9,13 +9,24 @@ class LEDController {
         System.loadLibrary(AlienFXProperties.ALIENFX_NATIVE_LIBRARY);
     }	
 	
-	public static final int ALLPOWERFULL_ALIENFX = 1;
-	public static final int AREA51_ALIENFX = 2;
-	public static final int NOT_FOUND = 0;
-	
+	// Alienware AlienFX pids (as given by lsusb)
+	public static final int ALLPOWERFULL_ALIENFX = 0x0512;
+
+	public static final int AREA51_ALIENFX = 0x0511;
+
+	public static final int M11XR1_ALIENFX = 0x0514;
+	public static final int M11XR2_ALIENFX = 0x0515;
+	public static final int M11XR3_ALIENFX = 0x0516;
+
+	public static final int M14X_ALIENFX = 0x0521;
+
+	public static final int M17XR3_ALIENFX = 0x0520;
+
+	public static final int NOT_FOUND = -1;
+
 	/**
 	 * Initializes the LED controller.
-	 * @return - ALLPOWERFULL_ALIENFX if the All powerfull alienfx controller was found, AREA51_ALIENFX if the area 51 laptop alienfx controller was found, NOT_FOUND if there was an error finidng the controller
+	 * @return - AlienFX PID
 	 */
 	native static int initialize();
 	
