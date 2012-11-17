@@ -116,6 +116,7 @@ public class MainFrame extends JFrame{
 	private void setupMenu(){
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Help");
+		JMenuItem exit = new JMenuItem("Exit");
 		JMenuItem item1 = new JMenuItem("Usage");
 		JMenuItem item2 = new JMenuItem("Reset AlienFX");
 		JMenuItem item3 = new JMenuItem("About");
@@ -123,11 +124,13 @@ public class MainFrame extends JFrame{
 		item1.addActionListener(new UsageHandler());
 		item2.addActionListener(new ResetHandler());
 		item3.addActionListener(new AboutHandler());
+		exit.addActionListener(new ExitListener());
 		
 		menu.add(item1);
 		menu.add(item2);
 		menu.add(item3);
 		menuBar.add(menu);
+		menuBar.add(exit);
 		setJMenuBar(menuBar);
 	}
 	
@@ -280,7 +283,11 @@ public class MainFrame extends JFrame{
 	
 	private class ExitListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			shutDown();
+			int choice = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to exit AlienFXLite?", "Input",
+					JOptionPane.YES_NO_OPTION);
+			if (choice == JOptionPane.YES_OPTION)
+				shutDown();
 		}		
 	}
 	
