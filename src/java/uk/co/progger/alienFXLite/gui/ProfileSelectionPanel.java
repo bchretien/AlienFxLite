@@ -3,6 +3,7 @@ package uk.co.progger.alienFXLite.gui;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import uk.co.progger.alienFXLite.AlienFXProperties;
 import uk.co.progger.alienFXLite.alienfx.AlienFXEngine;
 import uk.co.progger.alienFXLite.alienfx.AlienFXProfile;
 import uk.co.progger.alienFXLite.alienfx.AlienFXProfiles;
@@ -25,9 +27,10 @@ public class ProfileSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JComboBox chooseProfileBox;
+	private JComboBox<AlienFXProfiles> chooseProfileBox;
 	private JButton newButton;
 	private JButton saveButton;
+	private JButton reloadButton;
 	private JButton deleteButton;
 	private JButton applyButton;
 	private AlienFXEngine engine;
@@ -40,8 +43,7 @@ public class ProfileSelectionPanel extends JPanel {
 		this.profiles = profiles;
 		
 		//load images
-		
-		chooseProfileBox = new JComboBox(profiles);
+		chooseProfileBox = new JComboBox<AlienFXProfiles>(profiles);
 		newButton = new JButton(new ImageIcon(AlienFXResources.NEW_PROFILE_ICON_IMAGE));
 		newButton.setToolTipText(AlienFXTexts.CREATE_A_NEW_PROFILE);
 		newButton.addActionListener(new NewLister());
@@ -50,6 +52,10 @@ public class ProfileSelectionPanel extends JPanel {
 		saveButton.setToolTipText(AlienFXTexts.SAVE_THE_CURRENT_PROFILE);
 		saveButton.addActionListener(new SaveListener());
 		
+		reloadButton = new JButton(new ImageIcon(AlienFXResources.RELOAD_PROFILE_ICON_IMAGE));
+		reloadButton.setToolTipText(AlienFXTexts.RELOAD_THE_CURRENT_PROFILE);
+		reloadButton.addActionListener(new ReloadListener());
+		
 		deleteButton = new JButton(new ImageIcon(AlienFXResources.ERASE_PROFILE_ICON_IMAGE));
 		deleteButton.setToolTipText(AlienFXTexts.DELETE_THE_CURRENT_PROFILE);
 		deleteButton.addActionListener(new DeleteListener());
@@ -57,6 +63,7 @@ public class ProfileSelectionPanel extends JPanel {
 		applyButton = new JButton(new ImageIcon(AlienFXResources.APPLY_PROFILE_ICON_IMAGE));
 		applyButton.setToolTipText(AlienFXTexts.APPLY_THE_CURRENT_PROFILE);
 		applyButton.addActionListener(new ApplyListener());
+
 		model.addObserver(new ModelObserver());
 		updateButtons();
 		init();
@@ -70,8 +77,11 @@ public class ProfileSelectionPanel extends JPanel {
 		layout.putConstraint(SpringLayout.EAST, applyButton, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.NORTH, applyButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, deleteButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*2, SpringLayout.WEST, applyButton);
+		layout.putConstraint(SpringLayout.EAST, deleteButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*2, SpringLayout.WEST, reloadButton);
 		layout.putConstraint(SpringLayout.NORTH, deleteButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.EAST, reloadButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*2, SpringLayout.WEST, applyButton);
+		layout.putConstraint(SpringLayout.NORTH, reloadButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.EAST, saveButton, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, deleteButton);
 		layout.putConstraint(SpringLayout.NORTH, saveButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
@@ -83,14 +93,16 @@ public class ProfileSelectionPanel extends JPanel {
 		layout.putConstraint(SpringLayout.EAST, chooseProfileBox, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, newButton);
 		layout.putConstraint(SpringLayout.WEST, chooseProfileBox, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, this);
 
-		
 		newButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
 		saveButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
+		reloadButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
 		deleteButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
 		applyButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
+
 		add(chooseProfileBox);
 		add(newButton);
 		add(saveButton);
+		add(reloadButton);
 		add(deleteButton);
 		add(applyButton);
 	}
@@ -99,6 +111,7 @@ public class ProfileSelectionPanel extends JPanel {
 		applyButton.setEnabled(model.getProfile() != null);
 		deleteButton.setEnabled(model.getProfile() != null);
 		saveButton.setEnabled(model.getProfile() != null);
+		reloadButton.setEnabled(model.getProfile() != null);
 	}
 	
 	private class NewLister implements ActionListener{
@@ -139,6 +152,20 @@ public class ProfileSelectionPanel extends JPanel {
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(ProfileSelectionPanel.this.getRootPane(), String.format(AlienFXTexts.SAVE_PROFILE_ERROR_FORMAT,e1.getMessage()), AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
 			}
+		}
+	}
+
+	private class ReloadListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			// We basically delete the modified AlienFXProfile corresponding
+			// to the current profile, and we reload it from the saved file.
+			AlienFXProfile modified_profile = model.getProfile();
+			File f = new File(AlienFXProperties.ALIEN_FX_PROFILE_FOLDER_PATH
+					+ modified_profile.getName()
+					+ AlienFXProperties.ALIEN_FX_PROFILE_EXTENSION);
+			profiles.removeProfileFromList(modified_profile);
+			AlienFXProfile original_profile = profiles.loadProfile(f);
+			model.setProfile(original_profile);
 		}
 	}
 	

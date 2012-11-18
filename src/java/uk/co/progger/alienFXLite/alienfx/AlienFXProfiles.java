@@ -34,27 +34,33 @@ public class AlienFXProfiles  implements ComboBoxModel{
 		if(!f.isDirectory())
 			return;
 		for(File pf : f.listFiles()){
-			if(pf.isFile()){
-				if(pf.getName().endsWith(AlienFXProperties.ALIEN_FX_PROFILE_EXTENSION)){
-					FileInputStream fin;
-					try {
-						fin = new FileInputStream(pf);
+			loadProfile(pf);
+		}
+	}
+
+	public AlienFXProfile loadProfile(File pf){
+		if(pf.isFile()){
+			if(pf.getName().endsWith(AlienFXProperties.ALIEN_FX_PROFILE_EXTENSION)){
+				FileInputStream fin;
+				try 
+				{
+					fin = new FileInputStream(pf);
 					
-					    ObjectInputStream ois = new ObjectInputStream(fin);
-					    AlienFXProfile profile = (AlienFXProfile)ois.readObject();
-					    profile.loaded();
-					    addProfile(profile);
-					    ois.close();
-					    
-					} catch (Exception e) {
+				    ObjectInputStream ois = new ObjectInputStream(fin);
+				    AlienFXProfile profile = (AlienFXProfile)ois.readObject();
+				    profile.loaded();
+				    addProfile(profile);
+				    ois.close();
+				    return profile;
+				} catch (Exception e) {
 						e.printStackTrace();
-					} 
+						return null;
 				}
 			}
 		}
+		return null;
 	}
-	
-	
+
 	public void writeProfile(AlienFXProfile p) throws IOException{
 		File f = new File(AlienFXProperties.ALIEN_FX_PROFILE_FOLDER_PATH);
 		if(!f.exists())
@@ -71,14 +77,18 @@ public class AlienFXProfiles  implements ComboBoxModel{
 			l.contentsChanged(new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, profiles.size()));
 	}
 	
-	public void removeProfile(AlienFXProfile p){
+	public void removeProfileFromList(AlienFXProfile p){
 		if(p == model.getProfile())
 			model.setProfile(null);
-		
+
 		profiles.remove(p);
 		for(ListDataListener l : new LinkedList<ListDataListener>(listeners))
 			l.contentsChanged(new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, profiles.size()));
-	
+	}
+
+	public void removeProfile(AlienFXProfile p){
+		removeProfileFromList(p);
+
 		//try to remove the file as well
 		File f = new File(AlienFXProperties.ALIEN_FX_PROFILE_FOLDER_PATH+p.getName()+AlienFXProperties.ALIEN_FX_PROFILE_EXTENSION);
 		f.delete();

@@ -9,6 +9,7 @@ public class AlienFXResources {
 	public static final String APPLY_PROFILE_ICON_NAME = ICON_FOLDER + "/apply.png";
 	public static final String ERASE_PROFILE_ICON_NAME = ICON_FOLDER + "/erase.png";
 	public static final String SAVE_PROFILE_ICON_NAME = ICON_FOLDER + "/save.png";
+	public static final String RELOAD_PROFILE_ICON_NAME = ICON_FOLDER + "/reload.png";
 	public static final String NEW_PROFILE_ICON_NAME = ICON_FOLDER + "/new.png";
 	
 	public static final String COPY_ICON_NAME = ICON_FOLDER + "/copy.png";
@@ -25,6 +26,7 @@ public class AlienFXResources {
 	public static final Image NEW_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(NEW_PROFILE_ICON_NAME));
 	public static final Image APPLY_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(APPLY_PROFILE_ICON_NAME));
 	public static final Image SAVE_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(SAVE_PROFILE_ICON_NAME));
+	public static final Image RELOAD_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(RELOAD_PROFILE_ICON_NAME));
 	public static final Image ERASE_PROFILE_ICON_IMAGE = Toolkit.getDefaultToolkit().getImage(AlienFXResources.class.getResource(ERASE_PROFILE_ICON_NAME));
 	
 	

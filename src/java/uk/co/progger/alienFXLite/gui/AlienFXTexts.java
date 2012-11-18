@@ -12,6 +12,7 @@ public class AlienFXTexts {
 	public static final String PROFILE_EXISTS_ERROR_TEXT = "Profile with that name already exists";
 	public static final String PROFILE_NAME_EMPTY_ERROR_TEXT = "Name cannot be empty";
 	public static final String SAVE_PROFILE_ERROR_FORMAT = "Failed to save the Profile: %s\n";
+	public static final String RELOAD_PROFILE_ERROR_FORMAT = "Failed to reload the Profile: %s\n";
 	public static final Object ALREADY_RUNNING_ERROR_TEXT = "AlienFX is already running";
 	
 	//warnings
@@ -38,6 +39,7 @@ public class AlienFXTexts {
 	public static final String APPLY_THE_CURRENT_PROFILE = "Apply the current Profile";
 	public static final String DELETE_THE_CURRENT_PROFILE = "Delete the current Profile";
 	public static final String SAVE_THE_CURRENT_PROFILE = "Save the current Profile";
+	public static final String RELOAD_THE_CURRENT_PROFILE = "Reload the current Profile";
 	public static final String CREATE_A_NEW_PROFILE = "Create a new Profile";
 	
 	public static final String PROFILE_SPEED_TEXT = "Speed:";
