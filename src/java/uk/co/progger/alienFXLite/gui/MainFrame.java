@@ -2,6 +2,7 @@ package uk.co.progger.alienFXLite.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -115,23 +116,39 @@ public class MainFrame extends JFrame{
 	
 	private void setupMenu(){
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Help");
+		// File menu
+		JMenu file_menu = new JMenu("File");
+
+		JMenuItem profiles_folder = new JMenuItem("Open profiles folder");
 		JMenuItem exit = new JMenuItem("Exit");
-		JMenuItem item1 = new JMenuItem("Usage");
-		JMenuItem item2 = new JMenuItem("Reset AlienFX");
-		JMenuItem item3 = new JMenuItem("About");
-		
-		item1.addActionListener(new UsageHandler());
-		item2.addActionListener(new ResetHandler());
-		item3.addActionListener(new AboutHandler());
+
+		profiles_folder.addActionListener(new OpenProfileFolderHandler());
 		exit.addActionListener(new ExitListener());
-		
-		menu.add(item1);
-		menu.add(item2);
-		menu.add(item3);
-		menuBar.add(menu);
-		menuBar.add(exit);
+
+		file_menu.add(profiles_folder);
+		file_menu.add(exit);
+
+		// Help menu
+		JMenu help_menu = new JMenu("Help");
+
+		JMenuItem usage = new JMenuItem("Usage");
+		JMenuItem reset = new JMenuItem("Reset AlienFX");
+		JMenuItem about = new JMenuItem("About");
+
+		usage.addActionListener(new UsageHandler());
+		reset.addActionListener(new ResetHandler());
+		about.addActionListener(new AboutHandler());
+
+		help_menu.add(usage);
+		help_menu.add(reset);
+		help_menu.add(about);
+
+		// Add menus to menu bar
+		menuBar.add(file_menu);
+		menuBar.add(help_menu);
+
 		setJMenuBar(menuBar);
+
 	}
 	
 	private void setupTray(){
@@ -233,6 +250,17 @@ public class MainFrame extends JFrame{
 			//setSize(getPreferredSize());
 		}		
 	}
+
+	private class OpenProfileFolderHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Desktop.getDesktop().open(new File(AlienFXProperties.ALIEN_FX_PROFILE_FOLDER_PATH));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 	
 	private class AboutHandler implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
@@ -294,7 +322,17 @@ public class MainFrame extends JFrame{
 	private class CloseListener implements WindowListener{
 		public void windowActivated(WindowEvent arg0) {}
 		public void windowClosed(WindowEvent arg0) {}
-		public void windowClosing(WindowEvent arg0) {if(useTrays){MainFrame.this.trayIcon.displayMessage(AlienFXTexts.ALIEN_FX_INFO_TITLE_TEXT, AlienFXTexts.ALIEN_FX_BACKGROUND_TEXT, TrayIcon.MessageType.INFO);MainFrame.this.setVisible(false);  updateTray();}}
+
+		public void windowClosing(WindowEvent arg0) {
+			if (useTrays) {
+				// MainFrame.this.trayIcon.displayMessage(
+				// AlienFXTexts.ALIEN_FX_INFO_TITLE_TEXT,
+				// AlienFXTexts.ALIEN_FX_BACKGROUND_TEXT,
+				// TrayIcon.MessageType.INFO);
+				MainFrame.this.setVisible(false);
+				updateTray();
+			}
+		}
 		public void windowDeactivated(WindowEvent arg0) {}
 		public void windowDeiconified(WindowEvent arg0) {}
 		public void windowIconified(WindowEvent arg0) {}
