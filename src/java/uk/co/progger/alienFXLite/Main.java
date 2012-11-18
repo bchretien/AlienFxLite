@@ -19,9 +19,26 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		parseArguments(args);
-		//set default look and feel. Dont care if an error happens
-		try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}catch(Exception e){System.err.println(AlienFXTexts.SYSTEM_UI_NOT_FOUND);};
-		try { JarClassLoader.loadLookAndFeel();}catch(Exception e){};
+		try {
+			// Try an exotic UI
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		}
+		// Else use a default one
+		catch (Exception e)
+		{
+			try {
+				// Set default look and feel
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception e1) {
+				System.err.println(AlienFXTexts.SYSTEM_UI_NOT_FOUND);
+			}	
+		}
+		
+		try
+		{
+			JarClassLoader.loadLookAndFeel();
+		}
+		catch(Exception e){};
 		
 		//launch the main frame
 		SwingUtilities.invokeLater(new Runnable(){ public void run(){new MainFrame(silentStart);}});

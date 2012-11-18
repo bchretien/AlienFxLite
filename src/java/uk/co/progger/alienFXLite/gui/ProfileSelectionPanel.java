@@ -1,5 +1,6 @@
 package uk.co.progger.alienFXLite.gui;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,7 @@ public class ProfileSelectionPanel extends JPanel {
 		
 		//load images
 		chooseProfileBox = new JComboBox<AlienFXProfiles>(profiles);
+
 		newButton = new JButton(new ImageIcon(AlienFXResources.NEW_PROFILE_ICON_IMAGE));
 		newButton.setToolTipText(AlienFXTexts.CREATE_A_NEW_PROFILE);
 		newButton.addActionListener(new NewLister());
@@ -77,10 +79,10 @@ public class ProfileSelectionPanel extends JPanel {
 		layout.putConstraint(SpringLayout.EAST, applyButton, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.NORTH, applyButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, deleteButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*2, SpringLayout.WEST, reloadButton);
+		layout.putConstraint(SpringLayout.EAST, deleteButton, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, reloadButton);
 		layout.putConstraint(SpringLayout.NORTH, deleteButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
-		layout.putConstraint(SpringLayout.EAST, reloadButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*2, SpringLayout.WEST, applyButton);
+		layout.putConstraint(SpringLayout.EAST, reloadButton, -AlienFXLiteGUIConstants.DEFAULT_PAD*4, SpringLayout.WEST, applyButton);
 		layout.putConstraint(SpringLayout.NORTH, reloadButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.EAST, saveButton, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, deleteButton);
@@ -90,9 +92,9 @@ public class ProfileSelectionPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, newButton, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.VERTICAL_CENTER, chooseProfileBox, 0, SpringLayout.VERTICAL_CENTER, saveButton);
-		layout.putConstraint(SpringLayout.EAST, chooseProfileBox, -AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, newButton);
-		layout.putConstraint(SpringLayout.WEST, chooseProfileBox, AlienFXLiteGUIConstants.DEFAULT_PAD, SpringLayout.WEST, this);
-
+		layout.putConstraint(SpringLayout.EAST, chooseProfileBox, -100, SpringLayout.WEST, newButton);
+		layout.putConstraint(SpringLayout.WEST, chooseProfileBox, 260, SpringLayout.WEST, this);
+		
 		newButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
 		saveButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
 		reloadButton.setMargin(new Insets(AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET, AlienFXLiteGUIConstants.BUTTON_INSET));
@@ -142,15 +144,21 @@ public class ProfileSelectionPanel extends JPanel {
 			
 			profiles.addProfile(newProfile);
 			profiles.setSelectedItem(newProfile);
-		}		
+		}
 	}
 	
 	private class SaveListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			try {
-				profiles.writeProfile(model.getProfile());
-			} catch (IOException e1) {
-				JOptionPane.showMessageDialog(ProfileSelectionPanel.this.getRootPane(), String.format(AlienFXTexts.SAVE_PROFILE_ERROR_FORMAT,e1.getMessage()), AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
+			int choice = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to save this profile?", "Save profile",
+					JOptionPane.YES_NO_OPTION);
+			if (choice == JOptionPane.YES_OPTION)
+			{
+				try {
+					profiles.writeProfile(model.getProfile());
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(ProfileSelectionPanel.this.getRootPane(), String.format(AlienFXTexts.SAVE_PROFILE_ERROR_FORMAT,e1.getMessage()), AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
@@ -172,7 +180,7 @@ public class ProfileSelectionPanel extends JPanel {
 	private class DeleteListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			int choice = JOptionPane.showConfirmDialog(null,
-					"Are you sure you want to delete this profile?", "Input",
+					"Are you sure you want to delete this profile?", "Delete profile",
 					JOptionPane.YES_NO_OPTION);
 			if (choice == JOptionPane.YES_OPTION)
 				profiles.removeProfile(model.getProfile());

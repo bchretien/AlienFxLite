@@ -3,12 +3,16 @@ package uk.co.progger.alienFXLite.gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -20,9 +24,11 @@ import javax.swing.event.PopupMenuListener;
 public class DropDownButton extends JButton{
 	private static final long serialVersionUID = 1L;
 	
-	private static final int ARROW_BUTTON_MIN_SIZE = 16;
+	private static final int ARROW_BUTTON_MIN_SIZE = 20;
+	private static final int ACTION_BUTTON_MIN_SIZE = 16;
 	private static final Insets zeroInsets = new Insets(0,0,0,0);
 	private static final Dimension buttonDimension = new Dimension(ARROW_BUTTON_MIN_SIZE, ARROW_BUTTON_MIN_SIZE);
+	private static final Dimension actionButtonDimension = new Dimension(ACTION_BUTTON_MIN_SIZE, ACTION_BUTTON_MIN_SIZE);
 	
 	private static final ActionHandlerItem itemActionhandler = new ActionHandlerItem(); 
 	private static final ActionHandler buttonActionHandler = new ActionHandler();
@@ -57,11 +63,29 @@ public class DropDownButton extends JButton{
 		buttonIds.add(button);
 	}
 	
-	private static class DropDownButtonItem extends JMenuItem{
+	private static class DropDownButtonItem extends JMenuItem
+	{
 		private static final long serialVersionUID = 1L;
 		private WeakReference<JButton> button;
+		Icon resized_icon;
+		
 		private DropDownButtonItem(JButton button){
-			super(button.getIcon());
+			Icon icon = button.getIcon();
+
+			// Resizing the icon to the proper size
+			float scale = (float)ACTION_BUTTON_MIN_SIZE/(float)icon.getIconWidth();
+
+			BufferedImage bi = new BufferedImage(
+					ACTION_BUTTON_MIN_SIZE,
+					ACTION_BUTTON_MIN_SIZE,
+					BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g = bi.createGraphics();
+			g.scale(scale,scale);
+			icon.paintIcon(null,g,0,0);
+			g.dispose();
+			resized_icon = new ImageIcon(bi);
+			
+			this.setIcon(resized_icon);
 			this.button = new WeakReference<JButton>(button);
 		}
 	

@@ -26,6 +26,7 @@ import uk.co.progger.alienFXLite.alienfx.AlienFXProfileSetting;
 public class ActionPanelFX extends ActionPanel{
 
 	private static final long serialVersionUID = 1L;
+	private static int REMOVE_BUTTON_WIDTH = 26;
 	
 	private AlienFXAction action;
 	private AlienFXProfileSetting setting;
@@ -35,6 +36,8 @@ public class ActionPanelFX extends ActionPanel{
 	private CardLayout card;
 	private JPanel actionPanel;
 	
+	private enum ActionType {COLOR, BLINK, MORPH};
+
 	public ActionPanelFX(ColorModel model, ActionClipboard clipboard, int index) {
 		super(model, clipboard, index);
 		this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
@@ -53,7 +56,9 @@ public class ActionPanelFX extends ActionPanel{
 		card.show(actionPanel, AlienFXActionColor.class.toString());
 		
 		add(actionPanel);
-		add(new RemoveButton());
+		JButton remove_button = new RemoveButton();
+		remove_button.setPreferredSize(new Dimension(REMOVE_BUTTON_WIDTH, REMOVE_BUTTON_WIDTH));
+		add(remove_button);
 	}
 	
 	public void setAction(AlienFXProfileSetting settings, AlienFXAction action) {
@@ -98,7 +103,7 @@ public class ActionPanelFX extends ActionPanel{
 		private ColorModelPanel color;
 		public BlinkPanel(){
 			super(new BorderLayout());
-			color = new ColorModelPanel(true);
+			color = new ColorModelPanel(ActionType.BLINK);
 			add(color, BorderLayout.CENTER);
 		}
 		public void setAction(AlienFXAction action){
@@ -111,7 +116,7 @@ public class ActionPanelFX extends ActionPanel{
 		private ColorModelPanel color;
 		public ColorPanel(){
 			super(new BorderLayout());
-			color = new ColorModelPanel(false);
+			color = new ColorModelPanel(ActionType.COLOR);
 			add(color, BorderLayout.CENTER);
 		}
 		public void setAction(AlienFXAction action){
@@ -125,9 +130,9 @@ public class ActionPanelFX extends ActionPanel{
 		private ColorModelPanel color2;
 		public MorphPanel(){
 			super(new GridLayout(1, 2));
-			color1 = new ColorModelPanel(false);
+			color1 = new ColorModelPanel(ActionType.MORPH);
 			this.add(color1);
-			color2 = new ColorModelPanel(false);
+			color2 = new ColorModelPanel(ActionType.MORPH);
 			this.add(color2);
 		}
 		public void setAction(AlienFXAction action){
@@ -149,15 +154,15 @@ public class ActionPanelFX extends ActionPanel{
 		}
 	}
 	
-	private class ColorModelPanel extends JButton implements ActionListener, Observer, MouseListener{
+	private class ColorModelPanel extends JButton implements ActionListener, Observer, MouseListener
+	{
 		private static final long serialVersionUID = 1L;
 		private ColorModel cModel;
-		private boolean blink;
+		private ActionType type;
 
-		public ColorModelPanel(boolean blink) {
+		public ColorModelPanel(ActionType type) {
 			super();
-			this.blink = blink;
-			this.setMinimumSize(new Dimension(0,0));
+			this.type = type;
 			this.addActionListener(this);
 			this.addMouseListener(this);
 		}
@@ -165,15 +170,17 @@ public class ActionPanelFX extends ActionPanel{
 			Graphics2D g = (Graphics2D) g1;
 			g.setStroke(AlienFXLiteGUIConstants.borderStroke);
 			g.setColor(cModel.getColor());
-			if(blink){
-				//g.setColor(Color.black);
+			if(type == ActionType.BLINK){
 				int height = getHeight();
 				int width = getWidth();
-				for(int i = 2; i < width-6; i++)
+				for(int i = 3; i < width-6; i++)
 					g.fillOval(i, (int)(Math.sin(1+i*(Math.PI/9.3))*(height - 15)) + 9, 4, 4);
-			}else
+			}
+			else if (type == ActionType.COLOR || type == ActionType.MORPH)
+			{
 				g.fillRoundRect(2, 0, getWidth()-4, getHeight()-0,16,16);
-			
+			}
+
 			//draw border
 			g.setColor(AlienFXLiteGUIConstants.regularBorderColor);
 			g.drawRoundRect(2, 0, getWidth()-4, getHeight()-0,16,16);

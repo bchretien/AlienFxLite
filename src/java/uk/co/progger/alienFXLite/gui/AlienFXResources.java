@@ -13,10 +13,10 @@ public class AlienFXResources {
 	public static final String NEW_PROFILE_ICON_NAME = ICON_FOLDER + "/new.png";
 	
 	public static final String COPY_ICON_NAME = ICON_FOLDER + "/copy.png";
-	public static final String PASTE_ICON_NAME = ICON_FOLDER + "/paste.png";
-	public static final String CREATE_COLOR_ICON_NAME = ICON_FOLDER + "/createColor.png";
-	public static final String CREATE_MORPH_ICON_NAME = ICON_FOLDER + "/createMorph.png";
-	public static final String CREATE_BLINK_ICON_NAME = ICON_FOLDER + "/createBlink.png";
+	public static final String PASTE_ICON_NAME = ICON_FOLDER + "/paste_32.png";
+	public static final String CREATE_COLOR_ICON_NAME = ICON_FOLDER + "/createColor_32.png";
+	public static final String CREATE_MORPH_ICON_NAME = ICON_FOLDER + "/createMorph_32.png";
+	public static final String CREATE_BLINK_ICON_NAME = ICON_FOLDER + "/createBlink_32.png";
 	public static final String ERASE_ACTION_ICON_NAME = ICON_FOLDER + "/eraseAction.png";
 	
 	public static final String INFO_ACTION_ICON_NAME = ICON_FOLDER + "/info.png";

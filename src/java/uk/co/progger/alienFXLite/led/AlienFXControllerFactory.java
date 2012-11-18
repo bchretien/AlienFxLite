@@ -25,7 +25,7 @@ public class AlienFXControllerFactory {
 		if(deviceId == LEDController.NOT_FOUND)
 			throw new AlienFXControllerNotFoundException();
 		
-		else if(deviceId == LEDController.ALLPOWERFULL_ALIENFX)
+		else if (deviceId == LEDController.ALLPOWERFULL_ALIENFX)
 			controller = new AlienFXAllPowerFull();
 		
 		else if(deviceId == LEDController.AREA51_ALIENFX)
@@ -33,6 +33,8 @@ public class AlienFXControllerFactory {
 		
 		else if(deviceId == LEDController.M14X_ALIENFX)
 			controller = new AlienFXAllPowerFull();
+
+		else throw new AlienFXControllerNotFoundException();
 
 		controller.ping();
 		

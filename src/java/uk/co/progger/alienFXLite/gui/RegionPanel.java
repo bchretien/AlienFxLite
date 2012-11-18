@@ -15,13 +15,16 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import uk.co.progger.alienFXLite.alienfx.AlienFXAction;
 import uk.co.progger.alienFXLite.alienfx.AlienFXProfileSetting;
 import uk.co.progger.alienFXLite.led.AlienFXController;
 
 public class RegionPanel extends JPanel{	
-	private static final int REGION_H_GAP = 2;
+	private static final int REGION_V_GAP = 4;
+	private static final int REGION_H_GAP = 8;
+
 	private static final long serialVersionUID = 1L;
 	private static final int ARRAY_INITIAL_CAPACITY = 40;
 
@@ -54,7 +57,7 @@ public class RegionPanel extends JPanel{
 		
 		label = new JLabel();		
 		observer = new ChangeObserver();
-		sequencePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,2,REGION_H_GAP));
+		sequencePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, REGION_H_GAP, REGION_V_GAP));
 
 		//needed for selection
 		this.addMouseListener(mousehandler);
@@ -83,7 +86,7 @@ public class RegionPanel extends JPanel{
 		
 		label.setText(AlienFXController.regionLookUp.get(setting.getRegion()).description);
 		label.setPreferredSize(new Dimension(width, label.getPreferredSize().height));
-		
+
 		update();
 	}
 	

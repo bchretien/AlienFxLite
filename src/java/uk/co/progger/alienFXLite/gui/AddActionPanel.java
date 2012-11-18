@@ -1,6 +1,7 @@
 package uk.co.progger.alienFXLite.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,10 +41,11 @@ public class AddActionPanel extends ActionPanel {
 		super(model,clipboard,index);
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0,0));
-		addColor = new AddButton(this, AddButton.TYPE.COLOR,colorIcon);
-		addBlink = new AddButton(this, AddButton.TYPE.BLINK,blinkIcon);
-		addMorph = new AddButton(this, AddButton.TYPE.MORPH,morphIcon);
-		addPaste = new AddButton(this, AddButton.TYPE.PASTE,pasteIcon);
+
+		addColor = new AddButton(this, AddButton.TYPE.COLOR, colorIcon);
+		addBlink = new AddButton(this, AddButton.TYPE.BLINK, blinkIcon);
+		addMorph = new AddButton(this, AddButton.TYPE.MORPH, morphIcon);
+		addPaste = new AddButton(this, AddButton.TYPE.PASTE, pasteIcon);
 		
 		addColor.setMargin(AlienFXLiteGUIConstants.buttonInsets);
 		addBlink.setMargin(AlienFXLiteGUIConstants.buttonInsets);
@@ -109,13 +111,13 @@ public class AddActionPanel extends ActionPanel {
 				AddButton source = (AddButton)ev.getSource();
 				if (source.type == AddButton.TYPE.COLOR)
 					source.panel.setting.insertIntoSequence(new AlienFXActionColor(source.panel.model.getColor()), source.panel.getIndex());
-				if (source.type == AddButton.TYPE.BLINK)
+				else if (source.type == AddButton.TYPE.BLINK)
 					source.panel.setting.insertIntoSequence(new AlienFXActionBlink(source.panel.model.getColor()), source.panel.getIndex());
-				if (source.type == AddButton.TYPE.MORPH){
+				else if (source.type == AddButton.TYPE.MORPH) {
 					source.panel.setting.insertIntoSequence(new AlienFXActionMorph(
 									source.panel.getIndex() <= 0 ? source.panel.model.getColor() : source.panel.setting.getSequence().get(source.panel.getIndex()-1).getTrailingColor(), 
 									source.panel.getIndex() >= source.panel.setting.getSequence().size() ? Color.BLACK : source.panel.setting.getSequence().get(source.panel.getIndex()).getLeadingColor()), source.panel.getIndex());
-				}if (source.type == AddButton.TYPE.PASTE){
+				} else if (source.type == AddButton.TYPE.PASTE) {
 					List<AlienFXAction> actions = source.panel.clipboard.getClipBoard();
 					LinkedList<AlienFXAction> clones = new LinkedList<AlienFXAction>();
 					for(AlienFXAction action : actions){

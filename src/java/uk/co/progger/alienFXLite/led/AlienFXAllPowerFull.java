@@ -104,6 +104,4 @@ public class AlienFXAllPowerFull extends AlienFXController {
 	public int deviceId() {
 		return LEDController.ALLPOWERFULL_ALIENFX;
 	}
-
-	
 }

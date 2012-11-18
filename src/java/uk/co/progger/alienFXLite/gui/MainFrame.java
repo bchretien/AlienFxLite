@@ -104,9 +104,9 @@ public class MainFrame extends JFrame{
 		c1.add(panel, BorderLayout.PAGE_START);
 		c1.add(new ColorUsedPanel(model, colorModel), BorderLayout.CENTER);
 		add(c1, BorderLayout.LINE_START);
-		setSize(1100,500);
+		setSize(1100,550);
 		setLocationRelativeTo(null);
-		setResizable(AlienFXProperties.isWindows);
+		setResizable(true);
 		addWindowListener(new CloseListener());
 		setDefaultCloseOperation(useTrays ? JFrame.DO_NOTHING_ON_CLOSE : JFrame.EXIT_ON_CLOSE);
 		setupMenu();
@@ -312,7 +312,7 @@ public class MainFrame extends JFrame{
 	private class ExitListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			int choice = JOptionPane.showConfirmDialog(null,
-					"Are you sure you want to exit AlienFXLite?", "Input",
+					"Are you sure you want to exit AlienFXLite?", "Exit",
 					JOptionPane.YES_NO_OPTION);
 			if (choice == JOptionPane.YES_OPTION)
 				shutDown();

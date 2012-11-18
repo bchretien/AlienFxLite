@@ -14,7 +14,7 @@ import javax.swing.border.Border;
 public class AlienFXLiteGUIConstants {
 	public static int DEFAULT_PAD = 5;
 	public static final int BUTTON_INSET = 1;
-	public static final int ACTION_LENGTH = 70;
+	public static final int ACTION_LENGTH = 100;
 	
 	
 	public static final ImageIcon removeButtonImageIcon = new ImageIcon(AlienFXResources.ERASE_ACTION_ICON_IMAGE);
