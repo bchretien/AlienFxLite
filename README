@@ -1,10 +1,21 @@
++----------------+
++  AlienFX Lite  +
++----------------+
+
+A keyboard color management tool for Alienware laptops.
+
+This software was initially developed for M15x and M17x laptops. The latest modifications were tested on the M14x R2 laptop.
+
+
+
+
+########################################################################
+
 This is the original text extracted from:
 
 http://forum.notebookreview.com/alienware/458528-alienfx-lite-linux-windows-alienfx-tool.html
 
-"
-
-Hi,
+"Hi,
 
 Since I received my Allpowerfull M15x laptop, I always wanted to use the alienFX lights as an indicator of whether I am currently busy or available to talk to/etc... The solution provided by alienware would be to load up the alienFX software (takes a relative long time), load up a previously created profile, hit the apply button and exit the application. Suffice to say that this is really impractical to be of any use. The other major problem was that I use mainly Linux as my working environment and alienfx is not available for linux and the alienware software seems not to work on Windows over a virtual machine installed(tried both Vmware and VMBox).
 
@@ -36,20 +47,6 @@ AlienFX Lite is a simple cross-platform program to create profiles and set the A
 Linux (32 bit), Linux(64 bit), Mac OS X(UNTESTED), Windows 7(64 bit), Windows 7 (32 bit), Windows Vista (32bit), Windows Vista 64bit, Windows XP
 
 Special Thanks:
-Thanks go to Ingrater (http://3d.benjamin-thaut.de/) for providing me with the protocol for the alienFX device and some windows native code.
+Thanks go to Ingrater (http://3d.benjamin-thaut.de/) for providing me with the protocol for the alienFX device and some windows native code."
 
-
-"
-End of Qouted Text.
-
-Now, I'm decided to start sharing this Great tool, why? becasuse I recently bought an almighty powerful alienware MX15 ;D  and because this is my personal ( projects,entertainment, work ) lappie, and I love linux, first things I investigated was if there were linux support for all the hardware, including the amazing backlit keyboard. That's how I found AlienFxLite.  Now, after thinking so much about how great this thing is, I decided to share to others, so we can improve the tool.
-
-
-Enjoy.
-
-
-@m3rol
-
-
-
-
+########################################################################
