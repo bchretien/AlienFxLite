@@ -55,6 +55,12 @@ public class AlienFXTexts {
 	public static final String ACTION_BLINK_TEXT = "Blink";
 	public static final String ACTION_MORPH_TEXT = "Morph";
 	
+	// tooltips
+	public static final String COLOR_TOOLTIP = "Fixed color";
+	public static final String BLINK_TOOLTIP = "Blinking color";
+	public static final String MORPH_TOOLTIP = "Morphing color";
+	public static final String PASTE_TOOLTIP = "Paste selected effect";
+
 	//Alienware devices:
 	public static final String POWER_BUTTON_DESCRIPTION = "Power Button";
 	public static final String ALIENWARE_POWERBUTTON_EYES_DESCRIPTION = "Powerbutton Eyes";

@@ -72,6 +72,9 @@ public class DropDownButton extends JButton{
 		private DropDownButtonItem(JButton button){
 			Icon icon = button.getIcon();
 
+			// add tooltip text
+			this.setToolTipText(button.getToolTipText());
+
 			// Resizing the icon to the proper size
 			float scale = (float)ACTION_BUTTON_MIN_SIZE/(float)icon.getIconWidth();
 

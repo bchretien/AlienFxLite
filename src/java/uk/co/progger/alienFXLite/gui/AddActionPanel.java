@@ -28,7 +28,7 @@ public class AddActionPanel extends ActionPanel {
 	private static final ImageIcon blinkIcon = new ImageIcon(AlienFXResources.CREATE_BLINK_ICON_IMAGE);
 	private static final ImageIcon morphIcon = new ImageIcon(AlienFXResources.CREATE_MORPH_ICON_IMAGE);
 	private static final ImageIcon pasteIcon = new ImageIcon(AlienFXResources.PASTE_ICON_IMAGE);
-	
+
 	private AddButton addColor;
 	private AddButton addBlink;
 	private AddButton addMorph;
@@ -42,10 +42,10 @@ public class AddActionPanel extends ActionPanel {
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0,0));
 
-		addColor = new AddButton(this, AddButton.TYPE.COLOR, colorIcon);
-		addBlink = new AddButton(this, AddButton.TYPE.BLINK, blinkIcon);
-		addMorph = new AddButton(this, AddButton.TYPE.MORPH, morphIcon);
-		addPaste = new AddButton(this, AddButton.TYPE.PASTE, pasteIcon);
+		addColor = new AddButton(this, AddButton.TYPE.COLOR, colorIcon, AlienFXTexts.COLOR_TOOLTIP);
+		addBlink = new AddButton(this, AddButton.TYPE.BLINK, blinkIcon, AlienFXTexts.BLINK_TOOLTIP);
+		addMorph = new AddButton(this, AddButton.TYPE.MORPH, morphIcon, AlienFXTexts.MORPH_TOOLTIP);
+		addPaste = new AddButton(this, AddButton.TYPE.PASTE, pasteIcon, AlienFXTexts.PASTE_TOOLTIP);
 		
 		addColor.setMargin(AlienFXLiteGUIConstants.buttonInsets);
 		addBlink.setMargin(AlienFXLiteGUIConstants.buttonInsets);
@@ -97,11 +97,18 @@ public class AddActionPanel extends ActionPanel {
 		private enum TYPE{COLOR, BLINK, MORPH, PASTE};
 		private AddActionPanel panel;
 		private TYPE type;
-		
+
 		public AddButton(AddActionPanel panel, TYPE type, Icon icon) {
 			super(icon);
 			this.panel = panel;
 			this.type = type;
+		}
+
+		public AddButton(AddActionPanel panel, TYPE type, Icon icon, String tooltip) {
+			super(icon);
+			this.panel = panel;
+			this.type = type;
+			this.setToolTipText(tooltip);
 		}
 	}
 	
