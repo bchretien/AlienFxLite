@@ -26,6 +26,7 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -33,6 +34,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
@@ -280,7 +282,23 @@ public class MainFrame extends JFrame{
 	
 	private class UsageHandler implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(getRootPane(), AlienFXTexts.USAGE, AlienFXTexts.USAGE_TITLE, JOptionPane.INFORMATION_MESSAGE, null);
+			// Information panel with HTML text
+			JEditorPane editorPane = new JEditorPane();
+			editorPane.setEditable(false);
+			editorPane.setContentType("text/html");
+			editorPane.setText(AlienFXTexts.USAGE);
+
+			// Scrollable panel
+			JScrollPane editorScrollPane = new JScrollPane(editorPane);
+			editorScrollPane.setVerticalScrollBarPolicy(
+					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			editorScrollPane.setPreferredSize(new Dimension(450, 400));
+			editorScrollPane.setMinimumSize(new Dimension(10, 10));
+
+			// Display the panel
+			JOptionPane.showMessageDialog(getRootPane(), editorScrollPane,
+					AlienFXTexts.USAGE_TITLE, JOptionPane.INFORMATION_MESSAGE,
+					null);
 		}		
 	}
 	

@@ -26,7 +26,29 @@ public class AlienFXTexts {
 	public static final String ENTER_NAME_TITLE_TEXT = "Enter Name";
 	public static final String ENTER_NAME_TEXT = "Enter a name for the new profile";
 	public static final String USAGE_TITLE = "Usage";
-	public static final String USAGE = "The Application is very similar in use as the AlienFX application developed by Alienware. \nFirst, create a new profile. Then you can select the colors for the given regions of your computer. \nAdding an action (Color, Blink, Morph) is done by pressing one of the small dropdown buttons.\nTo copy paste a given sequence of actions, just select the actions by pressing on the section they are in, and drag the mouse over them.\n Additionally, one can use modifiers such as shift and control to modify the way in which selection behaves. \nTo paste the selected section, click on the add button and then select the paste icon (the last one).\n Additionally, one can easily change the colors of profile by selecting a new color and pressing on a color in the Color used panel.\n This will change all actions with the color pressed on, to the selected color. \nPressing with the right mouse button on any color button or action will result in selecting that color.\nFinally, if you get weird behaviour, reset the AlienFX device by pressing on the Reset button under the help menu";
+	public static final String USAGE =
+			"<html>"
+		 + "The Application is very similar in use as the"
+		 + " AlienFX application developed by Alienware.<br><br>"
+		 + "First, <b>create a new profile</b>. Then you can select the colors for the"
+		 + " given regions of your computer.<br><br>"
+		 + "Adding an action (<b>Color</b>, <b>Blink</b>, <b>Morph</b>) is done"
+		 + " by pressing one of the small dropdown buttons.<br><br>"
+		 + "To <b>copy/paste</b> a given sequence of actions, just select the "
+		 + "actions by pressing on the section they are in, and drag the mouse "
+		 + "over them.<br><br>"
+		 + "Additionally, one can use modifiers such as <b>shift</b> and "
+		 + "<b>control</b> to modify the way in which selection behaves.<br><br>"
+		 + "To <b>paste</b> the selected section, click on the add button and "
+		 + "then select the paste icon (the last one).<br><br>Additionally, one"
+		 + " can easily change the colors of profile by selecting a new color "
+		 + "and pressing on a color in the Color used panel. This will change "
+		 + "all actions with the color pressed on, to the selected color.<br><br>"
+		 + "Pressing with the <b>right mouse button</b> on any color button or "
+		 + "action will result in selecting that color.<br><br>"
+		 + "Finally, if you get weird behaviour, <b>reset</b> the AlienFX "
+		 + "device by pressing on the Reset button under the help menu."
+		 + "</html>";
 	public static final String ABOUT_FORMAT = "AlienFX Lite %s developed by %s";
 	public static final String ABOUT_TITLE = "About";
 
