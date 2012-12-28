@@ -94,18 +94,25 @@ public class MainFrame extends JFrame{
 		chooser.setPreviewPanel(new JPanel());
 		
 		ColorModel colorModel = new ColorModel();
-		add(new ProfileSelectionPanel(model, engine, profiles), BorderLayout.PAGE_START);
-		
+
+		// Top row: device name, profile selection panel
+		JPanel toprow = new JPanel(new BorderLayout());
+		toprow.add(new DeviceInfoPanel(engine.getController().description), BorderLayout.LINE_START);
+		toprow.add(new ProfileSelectionPanel(model, engine, profiles), BorderLayout.CENTER);
+		add(toprow, BorderLayout.PAGE_START);
+
 		JPanel profile = new ProfilePanel(model,colorModel);
 		profile.setBorder(BorderFactory.createTitledBorder(AlienFXTexts.PROFILE_TEXT));
 		add(profile, BorderLayout.CENTER);
+
+		JPanel leftcolumn = new JPanel(new BorderLayout());
+		JPanel colorchooserpanel = new ColorChooserPanel(colorModel);
 		
-		JPanel c1 = new JPanel(new BorderLayout());
-		JPanel panel = new ColorChooserPanel(colorModel);
-		panel.setBorder(BorderFactory.createTitledBorder(AlienFXTexts.COLORS_TEXT));
-		c1.add(panel, BorderLayout.PAGE_START);
-		c1.add(new ColorUsedPanel(model, colorModel), BorderLayout.CENTER);
-		add(c1, BorderLayout.LINE_START);
+		colorchooserpanel.setBorder(BorderFactory.createTitledBorder(AlienFXTexts.COLORS_TEXT));
+		leftcolumn.add(colorchooserpanel, BorderLayout.PAGE_START);
+		leftcolumn.add(new ColorUsedPanel(model, colorModel), BorderLayout.CENTER);
+		add(leftcolumn, BorderLayout.LINE_START);
+		
 		setSize(1100,550);
 		setLocationRelativeTo(null);
 		setResizable(true);

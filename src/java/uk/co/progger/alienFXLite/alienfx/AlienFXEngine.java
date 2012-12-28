@@ -123,4 +123,13 @@ public class AlienFXEngine {
 	public AlienFXProfile createProfile(String name) {
 		return new AlienFXProfile(name, controller);
 	}
+	
+	/**
+	 * Return the controller associated with the engine
+	 * @return AlienFX controller
+	 */
+	public AlienFXController getController()
+	{
+		return controller;
+	}
 }

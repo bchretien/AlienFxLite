@@ -27,6 +27,7 @@ SET(JAVA_ALIENFX_SRC
   ${currentFolder}/gui/ColorPanel.java
   ${currentFolder}/gui/ColorUsedPanel.java
   ${currentFolder}/gui/DashedBorder.java
+  ${currentFolder}/gui/DeviceInfoPanel.java
   ${currentFolder}/gui/DropDownButton.java
   ${currentFolder}/gui/JXTrayIcon.java
   ${currentFolder}/gui/MainFrame.java
