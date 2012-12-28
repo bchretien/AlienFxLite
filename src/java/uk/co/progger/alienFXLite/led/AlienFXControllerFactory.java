@@ -32,7 +32,7 @@ public class AlienFXControllerFactory {
 			controller = new AlienFXArea51Controller();
 		
 		else if(deviceId == LEDController.M14X_ALIENFX)
-			controller = new AlienFXAllPowerFull();
+			controller = new AlienFXM14xController();
 
 		else throw new AlienFXControllerNotFoundException();
 

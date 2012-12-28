@@ -40,6 +40,7 @@ SET(JAVA_ALIENFX_SRC
   ${currentFolder}/led/AlienFXController.java
   ${currentFolder}/led/AlienFXControllerFactory.java
   ${currentFolder}/led/AlienFXControllerNotFoundException.java
+  ${currentFolder}/led/AlienFXM14xController.java
   ${currentFolder}/led/AlienFXPowerMode.java
   ${currentFolder}/led/AlienFXRegion.java
   ${currentFolder}/led/LEDController.java
