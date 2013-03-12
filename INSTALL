@@ -1,4 +1,4 @@
-Depencendies:
+Dependencies:
   * libusb (version 0.1 and 1.0 supported)
   * lsusb (Linux)
   * CMake (>= 2.8)
@@ -17,3 +17,4 @@ AlienFX.jar will be installed in the root folder. Then, you can launch the progr
  
   * else:
     > sudo java -jar AlienFX.jar
+
