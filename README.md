@@ -27,11 +27,15 @@ $ make && make install
 
   * if your user has USB rights:
 
-    $ java -jar AlienFX.jar
+```sh
+$ java -jar AlienFX.jar
+```
 
   * else:
 
-    $ sudo java -jar AlienFX.jar
+```sh
+$ sudo java -jar AlienFX.jar
+```
 
 ## Thanks
 
