@@ -6,9 +6,9 @@ PROJECT(AlienFxLite)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
 
-########################################################################
-# FIRST PART: GENERATE LED CONTROLLER LIB (C++)
-########################################################################
+#######################################################################
+#                     GENERATE C++ LED CONTROLLER                     #
+#######################################################################
 
 FIND_PACKAGE(PkgConfig REQUIRED)
 
@@ -56,9 +56,9 @@ SET_TARGET_PROPERTIES(Alien${ARCH}
 SET(LIBRARY_EXTENSION ".so")
 SET(NATIVE_LIBRARY_NAME "libAlien${ARCH}${LIBRARY_EXTENSION}")
 
-########################################################################
-# SECOND PART: GENERATE JAVA GUI
-########################################################################
+#######################################################################
+#                          GENERATE JAVA GUI                          #
+#######################################################################
 
 # Java required
 FIND_PACKAGE(Java REQUIRED COMPONENTS Development)
@@ -94,9 +94,10 @@ ADD_CUSTOM_COMMAND(
    POST_BUILD
 )
 
-########################################################################
-# THIRD PART: INSTALL FILES
-########################################################################
+#######################################################################
+#                            SETUP INSTALL                            #
+#######################################################################
+
 
 # Install jar in the share directory
 INSTALL(FILES ${AlienFX_jar} DESTINATION share/alienfx-lite)
@@ -106,3 +107,14 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/bin/alienfx-lite.in
                ${CMAKE_BINARY_DIR}/bin/alienfx-lite @ONLY)
 INSTALL(PROGRAMS ${CMAKE_BINARY_DIR}/bin/alienfx-lite
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+
+#######################################################################
+#                           SETUP UNINSTALL                           #
+#######################################################################
+
+CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/cmake_uninstall.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+               IMMEDIATE @ONLY)
+
+ADD_CUSTOM_TARGET(uninstall
+  COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
