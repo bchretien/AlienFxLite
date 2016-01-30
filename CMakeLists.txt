@@ -91,6 +91,7 @@ INCLUDE(src/java/uk/co/progger/alienFXLite/SourcesLib.cmake)
 # GUI jar
 SET(CMAKE_JAVA_TARGET_OUTPUT_NAME AlienFX)
 SET(CMAKE_JAVA_JAR_ENTRY_POINT uk/co/progger/alienFXLite/Launcher)
+SET(CMAKE_JAVA_COMPILE_FLAGS -Xlint:all)
 ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
 
 # Install in the root folder
