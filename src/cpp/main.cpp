@@ -1,8 +1,10 @@
 #include <libusb.h>
 
-#include <iostream>
 #include <string>
-#include <stdlib.h>  // strtol
+#include <utility>
+#include <stdexcept>
+#include <cassert>
+#include <cstdio>
 
 #include "LEDController.h"
 
@@ -18,6 +20,8 @@
 #define READ_INDEX 0x0
 
 #define ALLPOWERFULL_ALIENFX_PID 0x512
+
+#define ALIENWARE_VENDOR_ID 0x187c
 
 #define NOT_FOUND -1
 
@@ -40,6 +44,50 @@ void attach(libusb_device_handle* device)
   libusb_attach_kernel_driver(device, 0);
 }
 
+int findDevice()
+{
+  libusb_device** dlist;
+  int err = 0;
+  ssize_t cnt = libusb_get_device_list(context, &dlist);
+
+  if (cnt < 0)
+    throw std::runtime_error ("could not get USB device list");
+
+  libusb_device* found = NULL;
+  uint16_t vid = 0;
+  uint16_t pid = 0;
+  for (ssize_t i = 0; i < cnt; i++)
+  {
+    libusb_device* device = dlist[i];
+    libusb_device_descriptor desc = {0};
+    err = libusb_get_device_descriptor(device, &desc);
+    if (err != 0)
+      throw std::runtime_error ("could not get USB device descriptor");
+
+    vid = desc.idVendor;
+    pid = desc.idProduct;
+
+    if (vid == ALIENWARE_VENDOR_ID)
+    {
+      found = device;
+      printf("Device found: %04x:%04x\n", vid, pid);
+      break;
+    }
+  }
+
+  if (found)
+  {
+    int err = libusb_open(found, &alienFx);
+    if (err)
+      throw std::runtime_error ("could not open USB device");
+    detach(alienFx);
+    int res = libusb_claim_interface(alienFx, 0);
+    if (res < 0) return NOT_FOUND;
+    return pid;
+  }
+  else return NOT_FOUND;
+}
+
 int WriteDevice(unsigned char* pData, int pDataLength)
 {
   return libusb_control_transfer(alienFx, SEND_REQUEST_TYPE, SEND_REQUEST,
@@ -52,54 +100,11 @@ int ReadDevice(unsigned char* pData, int pDataLength)
                                  READ_VALUE, READ_INDEX, pData, pDataLength, 0);
 }
 
-std::string exec(const char* cmd)
-{
-  FILE* pipe = popen(cmd, "r");
-  if (!pipe) return "ERROR";
-  char buffer[128];
-  std::string result = "";
-  while (!feof(pipe))
-  {
-    if (fgets(buffer, 128, pipe) != NULL) result += buffer;
-  }
-  pclose(pipe);
-  return result;
-}
-
 int AlienfxInit()
 {
   libusb_init(&context);
   libusb_set_debug(context, 3);
-
-  // TODO: find a cleaner and more portable solution to get the PID
-  // try to find the vid/pid of the alienware hardware
-  const char* usb_cmd =
-      "lsusb | grep \"Alienware Corporation\" | cut -d' ' -f 6";
-  std::string output = exec(usb_cmd);
-
-  // no AlienFX device detected
-  if (output.length() == 0) return NOT_FOUND;
-
-  std::string prefix = "0x";
-  std::string strVID = prefix + output.substr(0, 4);
-  std::string strPID = prefix + output.substr(6);
-
-  // convert vid/pid to uint16 for libusb
-  uint16_t vid = strtol(strVID.c_str(), NULL, 16);
-  uint16_t pid = strtol(strPID.c_str(), NULL, 16);
-
-  alienFx = libusb_open_device_with_vid_pid(context, vid, pid);
-
-  // device not found, return NOT_FOUND
-  if (alienFx == NULL) return NOT_FOUND;
-
-  detach(alienFx);
-
-  int res = libusb_claim_interface(alienFx, 0);
-
-  if (res < 0) return NOT_FOUND;
-
-  return pid;
+  return findDevice();
 }
 
 void AlienfxDeinit()
@@ -122,7 +127,16 @@ JNIEXPORT jint JNICALL
 Java_uk_co_progger_alienFXLite_led_LEDController_initialize(JNIEnv* env,
                                                             jclass c)
 {
-  return AlienfxInit();
+  int pid = NOT_FOUND;
+  try {
+    pid = AlienfxInit();
+  }
+  catch (const std::runtime_error& e)
+  {
+    fprintf(stderr, "%s", e.what());
+    return NOT_FOUND;
+  }
+  return pid;
 }
 
 /*

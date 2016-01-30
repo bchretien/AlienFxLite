@@ -11,7 +11,6 @@ modifications were tested on the M14x R2 and R3 laptops.
 ## Dependencies
 
 * libusb (version 0.1 and 1.0 supported)
-* lsusb (Linux)
 * CMake (>= 2.8)
 * Java Development Kit (JDK)
 * C++ compiler (gcc or clang)
