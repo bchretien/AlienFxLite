@@ -19,3 +19,4 @@ branches:
 script:
   - javac -version
   - ./install.sh
+  - jar tf AlienFX.jar
