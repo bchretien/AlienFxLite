@@ -18,5 +18,9 @@ branches:
 
 script:
   - javac -version
-  - ./install.sh
-  - jar tf AlienFX.jar
+  - mkdir build && cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/tmp
+  - make
+  - make install
+  - jar tf /tmp/share/alienfx-lite/AlienFX.jar
+  - cat /tmp/bin/alienfx-lite
