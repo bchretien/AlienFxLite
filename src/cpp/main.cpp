@@ -1,7 +1,5 @@
 #include <libusb.h>
 
-#include <string>
-#include <utility>
 #include <stdexcept>
 #include <cassert>
 #include <cstdio>
