@@ -1,6 +1,8 @@
 AlienFX Lite
 ============
 
+[![Build Status](https://travis-ci.org/bchretien/AlienFxLite.svg?branch=master)](https://travis-ci.org/bchretien/AlienFxLite)
+
 A keyboard color management tool for Alienware laptops.
 
 This software was initially developed for M15x and M17x laptops. The latest
