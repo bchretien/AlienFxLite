@@ -3,7 +3,8 @@ AlienFX Lite
 
 A keyboard color management tool for Alienware laptops.
 
-This software was initially developed for M15x and M17x laptops. The latest modifications were tested on the M14x R2 laptop.
+This software was initially developed for M15x and M17x laptops. The latest
+modifications were tested on the M14x R2 and R3 laptops.
 
 ## Dependencies
 
