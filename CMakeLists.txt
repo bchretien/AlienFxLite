@@ -100,7 +100,7 @@ ADD_CUSTOM_COMMAND(
 )
 
 # Add the native library to the executable jar
-ADD_CUSTOM_TARGET(Lib_to_jar ALL DEPENDS AlienFX)
+ADD_CUSTOM_TARGET(Lib_to_jar ALL DEPENDS AlienFX Images_to_jar)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
    ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_BINARY_DIR} lib/${NATIVE_LIBRARY_NAME}
