@@ -14,7 +14,7 @@ modifications were tested on the M14x R2 and R3 laptops.
 
 * libusb (version 0.1 and 1.0 supported)
 * CMake (>= 2.8)
-* Java Development Kit (JDK)
+* Java Development Kit (Java >= 7)
 * C++ compiler (gcc or clang)
 
 ## Compilation
