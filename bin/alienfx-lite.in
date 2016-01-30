@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar @CMAKE_INSTALL_PREFIX@/share/alienfx-lite/AlienFX.jar

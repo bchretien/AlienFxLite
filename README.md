@@ -19,26 +19,36 @@ modifications were tested on the M14x R2 and R3 laptops.
 
 ## Compilation
 
-In order to compile the Linux library (`libAlienXX.so`) and the Java GUI (`AlienFX.jar`):
+In order to compile and install the Linux library (`libAlienXX.so`) and the
+Java GUI (`AlienFX.jar`):
 
 ```sh
 $ mkdir build && cd build
-$ cmake ..
-$ make && make install
+# The default install prefix is /usr/local
+$ cmake .. -DCMAKE_INSTALL_PREFIX="YOUR_INSTALL_PREFIX"
+$ make
+$ make install
 ```
 
-`AlienFX.jar` will be installed in the root folder. Then, you can launch the program:
+`AlienFX.jar` will be installed in the `share` directory, and an `alienfx-lite`
+script will be generated. Then, you can launch the program:
 
   * if your user has USB rights:
 
 ```sh
+# By directly using the jar file:
 $ java -jar AlienFX.jar
+# Or by using the generated script:
+$ alienfx-lite
 ```
 
   * else:
 
 ```sh
+# By directly using the jar file:
 $ sudo java -jar AlienFX.jar
+# Or by using the generated script:
+$ sudo alienfx-lite
 ```
 
 ## Thanks

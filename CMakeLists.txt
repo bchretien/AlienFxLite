@@ -20,14 +20,13 @@ IF(LIBUSB-1.0_FOUND)
 ELSE(LIBUSB-1.0_FOUND)
   PKG_CHECK_MODULES(LIBUSB REQUIRED libusb)
   SET(LIBUSB_LIB "-lusb")
-  SET(LIBUSB_INCLUDE_DIRS ${LIBUSB_INCLUDE_DIRS})
 ENDIF(LIBUSB-1.0_FOUND)
 
 # Java JNI headers required
 FIND_PACKAGE(JNI2 REQUIRED)
 
 # Useful variable
-SET(ALIENLIB_SRC_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/src/cpp")
+SET(ALIENLIB_SRC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/cpp")
 
 # Include paths
 INCLUDE_DIRECTORIES(${ALIENLIB_SRC_PATH})
@@ -45,28 +44,17 @@ ELSE(CMAKE_SIZEOF_VOID_P EQUAL 8)
   SET(ARCH "32")
 ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
-# create the lib directory
-FILE(MAKE_DIRECTORY lib)
-
 # Native library
 ADD_LIBRARY(Alien${ARCH} SHARED ${ALIEN_SRC} ${ALIEN_HEADERS})
 # Link with libusb
 TARGET_LINK_LIBRARIES(Alien${ARCH} ${LIBUSB_LIB})
 # Add library to lib folder
-SET_TARGET_PROPERTIES(Alien${ARCH} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "lib")
+SET_TARGET_PROPERTIES(Alien${ARCH}
+  PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # Generate library name for later use
 SET(LIBRARY_EXTENSION ".so")
 SET(NATIVE_LIBRARY_NAME "libAlien${ARCH}${LIBRARY_EXTENSION}")
-
-# Install directory
-SET(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR})
-INSTALL(
-  TARGETS Alien${ARCH}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-)
 
 ########################################################################
 # SECOND PART: GENERATE JAVA GUI
@@ -86,15 +74,13 @@ SET(CMAKE_JAVA_TARGET_OUTPUT_NAME AlienFX)
 SET(CMAKE_JAVA_JAR_ENTRY_POINT uk/co/progger/alienFXLite/Launcher)
 SET(CMAKE_JAVA_COMPILE_FLAGS -Xlint:all)
 ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
-
-# Install in the root folder
-INSTALL_JAR(AlienFX ${CMAKE_CURRENT_SOURCE_DIR})
+GET_PROPERTY(AlienFX_jar TARGET AlienFX PROPERTY JAR_FILE)
 
 # Add the images to the executable jar
 ADD_CUSTOM_TARGET(Images_to_jar ALL DEPENDS AlienFX)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
-   ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_SOURCE_DIR}/src/java uk/co/progger/alienFXLite/gui/images/
+   ARGS    uf ${AlienFX_jar} -C ${CMAKE_SOURCE_DIR}/src/java uk/co/progger/alienFXLite/gui/images/
    TARGET  Images_to_jar
    POST_BUILD
 )
@@ -103,7 +89,20 @@ ADD_CUSTOM_COMMAND(
 ADD_CUSTOM_TARGET(Lib_to_jar ALL DEPENDS AlienFX Images_to_jar)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
-   ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_BINARY_DIR} lib/${NATIVE_LIBRARY_NAME}
+   ARGS    uf ${AlienFX_jar} -C ${CMAKE_BINARY_DIR} lib/${NATIVE_LIBRARY_NAME}
    TARGET  Lib_to_jar
    POST_BUILD
 )
+
+########################################################################
+# THIRD PART: INSTALL FILES
+########################################################################
+
+# Install jar in the share directory
+INSTALL_JAR(AlienFX ${CMAKE_INSTALL_PREFIX}/share/alienfx-lite)
+
+# Install executable script to the bin directory
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/bin/alienfx-lite.in
+               ${CMAKE_BINARY_DIR}/bin/alienfx-lite @ONLY)
+INSTALL(PROGRAMS ${CMAKE_BINARY_DIR}/bin/alienfx-lite
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
