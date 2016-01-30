@@ -8,6 +8,8 @@ A keyboard color management tool for Alienware laptops.
 This software was initially developed for M15x and M17x laptops. The latest
 modifications were tested on the M14x R2 and R3 laptops.
 
+![screenshot](https://raw.githubusercontent.com/bchretien/AlienFxLite/master/.images/AlienFX_Lite.png "Screenshot")
+
 ## Dependencies
 
 * libusb (version 0.1 and 1.0 supported)
