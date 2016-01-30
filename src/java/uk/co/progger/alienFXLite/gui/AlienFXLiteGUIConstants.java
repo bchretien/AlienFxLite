@@ -25,6 +25,6 @@ public class AlienFXLiteGUIConstants {
 	public static final Stroke borderStroke = new BasicStroke(2);
 	public static final Color regularBorderColor = new JPanel().getBackground().darker();
 	public static final Border regularBorder = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(regularBorderColor), BorderFactory.createEmptyBorder(1, 0, 1, 0)); 
-	public static final Border selectedBorder = BorderFactory.createCompoundBorder(new DashBorder(), BorderFactory.createEmptyBorder(1, 0, 1, 0)); 
+	public static final Border selectedBorder = BorderFactory.createCompoundBorder(new DashedBorder(), BorderFactory.createEmptyBorder(1, 0, 1, 0));
 	
 }

@@ -199,7 +199,7 @@ public class RegionPanel extends JPanel{
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() instanceof RegionPanel){
 				RegionPanel source = (RegionPanel)e.getSource();
-				source.selecting = !((RegionPanel) source).selecting;
+				source.selecting = !source.selecting;
 				source.mouseInitX = e.getX();
 				source.mouseInitY = e.getY();
 				source.mouseX = e.getX();

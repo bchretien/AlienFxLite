@@ -7,7 +7,7 @@ import java.awt.Insets;
 
 import javax.swing.border.Border;
 
-class DashBorder implements Border {
+class DashedBorder implements Border {
 	private final Insets insets = new Insets(1, 1, 1, 1);
 	private final int length = 5;
 	private final int space = 3;

@@ -134,7 +134,7 @@ public class ColorPanel extends JPanel{
 		double w = (double)getWidth();
 		double h = (double)getWidth();
 		
-		double x = ((double)(w * smallest)) / (double)biggest;
+		double x = (w * smallest) / (double)biggest;
 		Double baseRed = ((w*r - biggest*x)/(w-x));
 		Double baseGreen = ((w*g - biggest*x)/(w-x));
 		Double baseBlue = ((w*b - biggest*x)/(w-x));

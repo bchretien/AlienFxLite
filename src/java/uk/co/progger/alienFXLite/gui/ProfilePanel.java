@@ -166,7 +166,7 @@ public class ProfilePanel extends JPanel{
 		public void stateChanged(ChangeEvent e) {
 		    JSlider source = (JSlider)e.getSource();
 		    if (!source.getValueIsAdjusting()) {
-		        int speed = (int)source.getValue();
+		        int speed = source.getValue();
 		        if(model.getProfile() != null)
 		        	model.getProfile().setSpeed(speed);
 		    }

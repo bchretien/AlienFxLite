@@ -28,7 +28,7 @@ public class ProfileSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JComboBox chooseProfileBox;
+	private JComboBox<AlienFXProfile> chooseProfileBox;
 	private JButton newButton;
 	private JButton saveButton;
 	private JButton reloadButton;
@@ -44,7 +44,7 @@ public class ProfileSelectionPanel extends JPanel {
 		this.profiles = profiles;
 		
 		//load images
-		chooseProfileBox = new JComboBox(profiles);
+		chooseProfileBox = new JComboBox<AlienFXProfile>(profiles);
 
 		newButton = new JButton(new ImageIcon(AlienFXResources.NEW_PROFILE_ICON_IMAGE));
 		newButton.setToolTipText(AlienFXTexts.CREATE_A_NEW_PROFILE);

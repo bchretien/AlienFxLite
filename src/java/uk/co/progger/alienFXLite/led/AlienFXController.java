@@ -286,7 +286,7 @@ public abstract class AlienFXController {
 		byte b2 = (byte)((region >> 8) & 0xFF);
 		byte b3 = (byte)((region) & 0xFF);
 		
-		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_MORPH_COLOR, (byte)(block & 0xFF), (byte)b1, (byte)b2, (byte)b3, (byte)RG, (byte)B, (byte)RG2});
+		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_MORPH_COLOR, (byte)(block & 0xFF), b1, b2, b3, (byte)RG, (byte)B, (byte)RG2});
 		if(len != DATA_LENGTH)
 			throw new AlienFXCommunicationException(String.format(AlienFXTexts.DATA_LENGTH_ERROR_FORMAT, DATA_LENGTH ,len));
 		return len == DATA_LENGTH;
@@ -347,7 +347,7 @@ public abstract class AlienFXController {
 		byte b2 = (byte)((region >> 8) & 0xFF);
 		byte b3 = (byte)((region) & 0xFF);
 		
-		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_BLINK_COLOR, (byte)(block & 0xFF), (byte)b1, (byte)b2, (byte)b3, (byte)RG, (byte)B,0});
+		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_BLINK_COLOR, (byte)(block & 0xFF), b1, b2, b3, (byte)RG, (byte)B,0});
 		if(len != DATA_LENGTH)
 			throw new AlienFXCommunicationException(String.format(AlienFXTexts.DATA_LENGTH_ERROR_FORMAT, DATA_LENGTH ,len));
 		return len == DATA_LENGTH;
@@ -407,7 +407,7 @@ public abstract class AlienFXController {
 		byte b2 = (byte)((region >> 8) & 0xFF);
 		byte b3 = (byte)((region) & 0xFF);
 		
-		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_COLOR, (byte)(block & 0xFF), (byte)b1, (byte)b2, (byte)b3, (byte)RG, (byte)B,0});
+		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_COLOR, (byte)(block & 0xFF), b1, b2, b3, (byte)RG, (byte)B,0});
 		if(len != DATA_LENGTH)
 			throw new AlienFXCommunicationException(String.format(AlienFXTexts.DATA_LENGTH_ERROR_FORMAT, DATA_LENGTH ,len));
 		return len == DATA_LENGTH;
@@ -460,7 +460,7 @@ public abstract class AlienFXController {
 		for(i = 0; i < data.length; ++i)
 			newData[i] = data[i];
 		for(; i < DATA_LENGTH; ++i)
-			newData[i] = (byte)FILL_BYTE;
+			newData[i] = FILL_BYTE;
 		
 		return newData;
 	}

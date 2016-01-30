@@ -15,9 +15,9 @@ import javax.swing.event.ListDataListener;
 import uk.co.progger.alienFXLite.AlienFXProperties;
 import uk.co.progger.alienFXLite.gui.ProfileModel;
 
-public class AlienFXProfiles  implements ComboBoxModel{
+public class AlienFXProfiles  implements ComboBoxModel<AlienFXProfile> {
 
-	private static final String NEW_PROFILE = null;
+	private static final AlienFXProfile NEW_PROFILE = null;
 	private LinkedList<ListDataListener> listeners = new LinkedList<ListDataListener>();
 	private LinkedList<AlienFXProfile> profiles;
 	private ProfileModel model;
@@ -119,7 +119,7 @@ public class AlienFXProfiles  implements ComboBoxModel{
 	}
 
 	@Override
-	public Object getElementAt(int index) {
+	public AlienFXProfile getElementAt(int index) {
 		if(index == 0)
 			return NEW_PROFILE;
 		return profiles.get(index-1);
