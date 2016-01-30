@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import uk.co.progger.alienFXLite.AlienFXProperties;
 import uk.co.progger.alienFXLite.gui.AlienFXTexts;
 
-public class AlienFXM14xController extends AlienFXController {
+public class AlienFXM14xR2Controller extends AlienFXController {
 
 	private static final int STATE_BUSY = 0x11;
 	private static final int STATE_READY = 0x10;
@@ -55,8 +55,8 @@ public class AlienFXM14xController extends AlienFXController {
 	public static final int REGION_POWER_BUTTON = 0x2000; 
 	public static final int REGION_POWER_BUTTON_EYES = 0x4000; 
 	
-	public AlienFXM14xController() {
-		super("Alienware M14x", STATE_BUSY, STATE_READY, STATE_UNKNOWN_COMMAND,
+	public AlienFXM14xR2Controller() {
+		super("Alienware M14x R2", STATE_BUSY, STATE_READY, STATE_UNKNOWN_COMMAND,
 				COMMAND_END_STORAGE, COMMAND_SET_MORPH_COLOR, COMMAND_SET_BLINK_COLOR,
 				COMMAND_SET_COLOR, COMMAND_LOOP_BLOCK_END, COMMAND_TRANSMIT_EXECUTE,
 				COMMAND_GET_STATUS, COMMAND_RESET, COMMAND_SAVE_NEXT, COMMAND_SAVE,
@@ -100,6 +100,6 @@ public class AlienFXM14xController extends AlienFXController {
 
 	@Override
 	public int deviceId() {
-		return LEDController.M14X_ALIENFX;
+		return LEDController.M14XR2_ALIENFX;
 	}
 }
