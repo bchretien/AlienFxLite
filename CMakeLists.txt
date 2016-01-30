@@ -97,17 +97,19 @@ ADD_JAR(AlienFX ${JAVA_ALIENFX_SRC})
 INSTALL_JAR(AlienFX ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Add the images to the executable jar
-ADD_CUSTOM_TARGET(Images_to_jar ALL)
+ADD_CUSTOM_TARGET(Images_to_jar ALL DEPENDS AlienFX)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
    ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_SOURCE_DIR}/src/java uk/co/progger/alienFXLite/gui/images/
    TARGET  Images_to_jar
+   POST_BUILD
 )
 
 # Add the native library to the executable jar
-ADD_CUSTOM_TARGET(Lib_to_jar ALL)
+ADD_CUSTOM_TARGET(Lib_to_jar ALL DEPENDS AlienFX)
 ADD_CUSTOM_COMMAND(
    COMMAND ${Java_JAR_EXECUTABLE}
    ARGS    uf ${CMAKE_BINARY_DIR}/AlienFX.jar -C ${CMAKE_BINARY_DIR} lib/${NATIVE_LIBRARY_NAME}
    TARGET  Lib_to_jar
+   POST_BUILD
 )
