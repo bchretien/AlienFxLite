@@ -34,7 +34,7 @@ public class AlienFXControllerFactory {
 		else if(deviceId == LEDController.M14XR2_ALIENFX)
 			controller = new AlienFXM14xR2Controller();
 			
-                else if(deviceId == LEDController.M14XR3_ALIENFX)
+		else if(deviceId == LEDController.M14XR3_ALIENFX)
 			controller = new AlienFXM14xR3Controller();
 
 		else throw new AlienFXControllerNotFoundException();

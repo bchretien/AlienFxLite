@@ -19,8 +19,8 @@ class LEDController {
 	public static final int M11XR3_ALIENFX = 0x0516;
 
 	public static final int M14XR2_ALIENFX = 0x0521;
-        public static final int M14XR3_ALIENFX = 0x0525;
-        
+	public static final int M14XR3_ALIENFX = 0x0525;
+
 	public static final int M17XR3_ALIENFX = 0x0520;
 
 	public static final int NOT_FOUND = -1;
