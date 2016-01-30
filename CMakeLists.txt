@@ -99,7 +99,7 @@ ADD_CUSTOM_COMMAND(
 ########################################################################
 
 # Install jar in the share directory
-INSTALL_JAR(AlienFX ${CMAKE_INSTALL_PREFIX}/share/alienfx-lite)
+INSTALL(FILES ${AlienFX_jar} DESTINATION share/alienfx-lite)
 
 # Install executable script to the bin directory
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/bin/alienfx-lite.in
