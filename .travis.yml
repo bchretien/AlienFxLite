@@ -1,0 +1,21 @@
+language: java
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk6
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - libusb-dev
+
+branches:
+  only:
+    - master
+    - travis
+
+script:
+  - javac -version
+  - ./install.sh
