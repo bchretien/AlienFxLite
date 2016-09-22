@@ -6,6 +6,7 @@ public class AlienFXTexts {
 	public static final String ALIEN_FX_ERROR_TITLE_TEXT = "AlienFX error";
 	public static final String DATA_LENGTH_ERROR_FORMAT = "Data length should be %d but was %d";
 	public static final String DEVICE_NOT_PRESENT_ERROR_TEXT = "The application was unable to communicate with the alienFX device. The device is either not present, or the application lacks sufficient rights to access the device";
+	public static final String UNKNOWN_DEVICE_ERROR_TEXT = "Device unknown: no controller available. Please report this issue to https://github.com/bchretien/AlienFxLite";
 	public static final String COMMUNICATION_ERROR_FORMAT = "Error occured while trying to communicate with the AlienFX device: %s\n";
 	public static final Object DEVICE_PERMISSION_ERROR_TEXT = "The Device was found, but the application was unable to communicate with the alienFX controller. Do you have the right to access the alienfx device(e.g. are you running as admin)";
 	public static final String SYSTEM_UI_NOT_FOUND = "System UI not Found";

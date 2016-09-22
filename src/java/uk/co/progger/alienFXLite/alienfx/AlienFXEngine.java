@@ -9,6 +9,7 @@ import uk.co.progger.alienFXLite.led.AlienFXCommunicationException;
 import uk.co.progger.alienFXLite.led.AlienFXController;
 import uk.co.progger.alienFXLite.led.AlienFXControllerFactory;
 import uk.co.progger.alienFXLite.led.AlienFXControllerNotFoundException;
+import uk.co.progger.alienFXLite.led.AlienFXControllerUnknownDeviceException;
 import uk.co.progger.alienFXLite.led.AlienFXPowerMode;
 import uk.co.progger.alienFXLite.led.AlienFXRegion;
 
@@ -20,7 +21,7 @@ public class AlienFXEngine {
 	//The controller
 	private AlienFXController controller;
 	
-	public AlienFXEngine() throws AlienFXControllerNotFoundException, AlienFXCommunicationException{
+	public AlienFXEngine() throws AlienFXControllerNotFoundException, AlienFXControllerUnknownDeviceException, AlienFXCommunicationException{
 		controller = AlienFXControllerFactory.getAlienFXDevice();
 	}
 	

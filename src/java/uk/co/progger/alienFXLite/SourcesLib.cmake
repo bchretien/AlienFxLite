@@ -41,6 +41,7 @@ SET(JAVA_ALIENFX_SRC
   ${currentFolder}/led/AlienFXController.java
   ${currentFolder}/led/AlienFXControllerFactory.java
   ${currentFolder}/led/AlienFXControllerNotFoundException.java
+  ${currentFolder}/led/AlienFXControllerUnknownDeviceException.java
   ${currentFolder}/led/AlienFXM14xR2Controller.java
   ${currentFolder}/led/AlienFXM14xR3Controller.java
   ${currentFolder}/led/AlienFXM17xR3Controller.java

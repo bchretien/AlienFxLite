@@ -44,6 +44,7 @@ import uk.co.progger.alienFXLite.alienfx.AlienFXProfile;
 import uk.co.progger.alienFXLite.alienfx.AlienFXProfiles;
 import uk.co.progger.alienFXLite.led.AlienFXCommunicationException;
 import uk.co.progger.alienFXLite.led.AlienFXControllerNotFoundException;
+import uk.co.progger.alienFXLite.led.AlienFXControllerUnknownDeviceException;
 
 public class MainFrame extends JFrame{
 	
@@ -81,6 +82,9 @@ public class MainFrame extends JFrame{
 			setupTray();
 		} catch (AlienFXControllerNotFoundException e) {
 			JOptionPane.showMessageDialog(null, AlienFXTexts.DEVICE_NOT_PRESENT_ERROR_TEXT, AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
+			return;
+		} catch (AlienFXControllerUnknownDeviceException e) {
+			JOptionPane.showMessageDialog(null, AlienFXTexts.UNKNOWN_DEVICE_ERROR_TEXT, AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
 			return;
 		} catch (AlienFXCommunicationException e) {
 			JOptionPane.showMessageDialog(null, AlienFXTexts.DEVICE_PERMISSION_ERROR_TEXT, AlienFXTexts.ALIEN_FX_ERROR_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);

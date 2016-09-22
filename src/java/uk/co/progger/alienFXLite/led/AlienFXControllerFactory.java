@@ -16,7 +16,10 @@ public class AlienFXControllerFactory {
 	 * @throws AlienFXControllerNotFoundException
 	 * @throws AlienFXCommunicationException 
 	 */
-	public synchronized static AlienFXController getAlienFXDevice() throws AlienFXControllerNotFoundException, AlienFXCommunicationException{
+	public synchronized static AlienFXController getAlienFXDevice()
+		throws AlienFXControllerNotFoundException, AlienFXControllerUnknownDeviceException,
+		       AlienFXCommunicationException
+	{
 		if(controller != null)
 			return controller;
 		
@@ -43,7 +46,7 @@ public class AlienFXControllerFactory {
 		else if(deviceId == LEDController.M18XR2_ALIENFX)
 			controller = new AlienFXM18xR2Controller();
 
-		else throw new AlienFXControllerNotFoundException();
+		else throw new AlienFXControllerUnknownDeviceException();
 
 		controller.ping();
 		
