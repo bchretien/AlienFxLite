@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import uk.co.progger.alienFXLite.AlienFXProperties;
 import uk.co.progger.alienFXLite.gui.AlienFXTexts;
 
-public class AlienFXM17xR3Controller extends AlienFXController {
+public class AlienFXM17xController extends AlienFXController {
 
 	private static final int STATE_BUSY = 0x11;
 	private static final int STATE_READY = 0x10;
@@ -57,8 +57,12 @@ public class AlienFXM17xR3Controller extends AlienFXController {
 	public static final int REGION_POWER_BUTTON_EYES = 0x4000;
 	public static final int REGION_ALL_BUT_POWER = 0x0f9fff;
 	
-	public AlienFXM17xR3Controller() {
-		super("Alienware M17x R3", STATE_BUSY, STATE_READY, STATE_UNKNOWN_COMMAND,
+	public AlienFXM17xController() {
+		this("Alienware M17x");
+	}
+
+	public AlienFXM17xController(String description) {
+		super(description, STATE_BUSY, STATE_READY, STATE_UNKNOWN_COMMAND,
 				COMMAND_END_STORAGE, COMMAND_SET_MORPH_COLOR, COMMAND_SET_BLINK_COLOR,
 				COMMAND_SET_COLOR, COMMAND_LOOP_BLOCK_END, COMMAND_TRANSMIT_EXECUTE,
 				COMMAND_GET_STATUS, COMMAND_RESET, COMMAND_SAVE_NEXT, COMMAND_SAVE,
