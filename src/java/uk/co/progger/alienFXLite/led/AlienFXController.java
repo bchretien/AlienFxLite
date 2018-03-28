@@ -187,9 +187,9 @@ public abstract class AlienFXController {
 	
 	
 	public synchronized void waitForReady() throws AlienFXCommunicationException{
-		while(isBusy()){
-			try{Thread.sleep(40);}catch(Exception e){};
-		}
+		//while(isBusy()){
+		//	try{Thread.sleep(40);}catch(Exception e){};
+		//}
 	}
 	
 	/**
@@ -400,14 +400,40 @@ public abstract class AlienFXController {
 	 * @throws AlienFXCommunicationException 
 	 */
 	public synchronized boolean setLightWithColor(int block, int region, int r, int g, int b) throws AlienFXCommunicationException{
-		int RG = r & 0xF0;
-		RG = RG | ((g >> 4) & 0x0F);
-		int B = b & 0xF0;
-		byte b1 = (byte)((region >> 16) & 0xFF);
+				
+		int temp;
+		temp=g;
+		g=b;
+		b=temp;
+
+		//int RG = r & 0xF0;
+		//RG = RG | ((g >> 4) & 0x0F);
+		//int B = b & 0xF0;
+		byte b1 = (byte)((region >> 16) & 0xFF);	
 		byte b2 = (byte)((region >> 8) & 0xFF);
 		byte b3 = (byte)((region) & 0xFF);
-		
-		int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_COLOR, (byte)(block & 0xFF), b1, b2, b3, (byte)RG, (byte)B,0});
+		//System.out.println("r-" + r + " g-" + g + " b-" + b);
+		int RG = r & 0xF0;
+		RG = RG | ((g >> 4) & 0x0F);
+		int BR = b & 0xF0;
+		BR = BR | ((r >> 4) & 0x0F);
+		int GB = g & 0xF0;
+		GB = GB | ((b >> 4) & 0x0F);
+
+		//int len = LEDController.writeDebug(new byte[]{START_BYTE, COMMAND_SET_COLOR, (byte)(block & 0xFF), b1, b2, b3, (byte)RG, (byte)B,0});
+		int len = LEDController.writeDebug(
+			new byte[]{
+				START_BYTE,
+				COMMAND_SET_COLOR,
+				(byte)(block& 0xFF),
+				b1,
+				b2,
+				b3,
+				(byte)RG,
+				(byte)BR,
+				(byte)GB
+			});
+
 		if(len != DATA_LENGTH)
 			throw new AlienFXCommunicationException(String.format(AlienFXTexts.DATA_LENGTH_ERROR_FORMAT, DATA_LENGTH ,len));
 		return len == DATA_LENGTH;
