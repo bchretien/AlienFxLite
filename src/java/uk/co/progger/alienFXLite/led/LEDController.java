@@ -52,7 +52,7 @@ class LEDController {
 			}
 			
 			System.out.println();
-//			return 9;
+			return 9;
 		}
 		return write(data);
 	}
